@@ -540,10 +540,12 @@ class TerminalState extends MusicBeatState
 					FlxG.save.data.exploitationFound = true;
 					FlxG.save.flush();
 
+                    #if desktop
 					var programPath:String = Sys.programPath();
 					var textPath = programPath.substr(0, programPath.length - CoolSystemStuff.executableFileName().length) + "help me.txt";
 
 					File.saveContent(textPath, "you don't know what you're getting yourself into\n don't open the game for your own risk");
+                    #end
 					System.exit(0);
 				});
 			});

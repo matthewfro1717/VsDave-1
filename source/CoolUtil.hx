@@ -5,7 +5,7 @@ import flixel.FlxG;
 import openfl.utils.AssetCache;
 import flixel.math.FlxRandom;
 import flixel.math.FlxMath;
-import openfl.utils.Assets;
+import lime.utils.Assets;
 
 using StringTools;
 
@@ -105,6 +105,7 @@ class CoolUtil
 	{
 		Assets.cache.image.set(image, lime.graphics.Image.fromFile(image));
 	}
+
 	public static function isArrayEqualTo(array1:Array<Dynamic>, array2:Array<Dynamic>)
 	{
 		if (array1.length != array2.length)

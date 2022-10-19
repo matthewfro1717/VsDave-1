@@ -69,11 +69,11 @@
 
 	<!-- _______________________________ Libraries ______________________________ -->
 
-	<haxelib name="flixel" />
 	<haxedev set='webgl' />
+
+	<haxelib name="flixel" />
 	<haxelib name="flixel-addons" />
 	<haxelib name="hscript" />
-	<haxelib name="actuate" />
 	<haxelib name="flixel-ui" />
 	<haxelib name="faxe" if='switch'/>
 	<haxelib name="hxCodec" if="desktop || android" />

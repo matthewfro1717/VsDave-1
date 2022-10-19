@@ -442,6 +442,7 @@ class PlayState extends MusicBeatState
 		switch (SONG.song.toLowerCase())
 		{
 			case 'exploitation':
+				#if desktop
 				var programPath:String = Sys.programPath();
 				var textPath = programPath.substr(0, programPath.length - CoolSystemStuff.executableFileName().length) + "help me.txt";
 	
@@ -454,6 +455,7 @@ class PlayState extends MusicBeatState
 				{
 					FileSystem.deleteFile(path);
 				}
+				#end
 				Main.toggleFuckedFPS(true);
 
 				if (FlxG.save.data.exploitationState != null)
@@ -2304,7 +2306,7 @@ class PlayState extends MusicBeatState
 					startCountdown();
 			}
 		}
-		video.playVideo(Paths.video(name));
+		video.playVideo(SUtil.getPath() + Paths.video(name));
 	}
 
 	function playEndCutscene(name:String)
@@ -2316,7 +2318,7 @@ class PlayState extends MusicBeatState
 		{
 			LoadingState.loadAndSwitchState(new PlayState());
 		}
-		video.playVideo(Paths.video(name));
+		video.playVideo(SUtil.getPath() + Paths.video(name));
 	}
 
 	var previousFrameTime:Int = 0;

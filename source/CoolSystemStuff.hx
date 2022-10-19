@@ -2,9 +2,6 @@ package;
 
 // crazy system shit!!!!!
 // lordryan wrote this :) (erizur added cross platform env vars)
-import sys.io.File;
-import sys.io.Process;
-import haxe.io.Bytes;
 
 class CoolSystemStuff
 {
@@ -13,17 +10,20 @@ class CoolSystemStuff
 		// uhh this one is self explanatory
 		#if windows
 		return Sys.getEnv("USERNAME");
+		#elseif android
+		return android.os.Build.USER;
 		#else
 		return Sys.getEnv("USER");
 		#end
 	}
 
+	#if desktop
 	public static function getUserPath():String
 	{
 		// this one is also self explantory
 		#if windows
 		return Sys.getEnv("USERPROFILE");
-		#else
+		#elseif linux
 		return Sys.getEnv("HOME");
 		#end
 	}
@@ -33,11 +33,12 @@ class CoolSystemStuff
 		// gets appdata temp folder lol
 		#if windows
 		return Sys.getEnv("TEMP");
-		#else
+		#elseif linux
 		// most non-windows os dont have a temp path, or if they do its not 100% compatible, so the user folder will be a fallback
 		return Sys.getEnv("HOME");
 		#end
 	}
+
 	public static function executableFileName()
 	{
 		#if windows
@@ -47,4 +48,5 @@ class CoolSystemStuff
 		#end
 		return programPath[programPath.length - 1];
 	}
+	#end
 }

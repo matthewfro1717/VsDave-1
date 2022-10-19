@@ -5,7 +5,7 @@ import flixel.FlxG;
 import openfl.utils.AssetCache;
 import flixel.math.FlxRandom;
 import flixel.math.FlxMath;
-import lime.utils.Assets;
+import openfl.utils.Assets;
 
 using StringTools;
 

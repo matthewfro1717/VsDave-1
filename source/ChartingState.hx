@@ -2,7 +2,6 @@ package;
 
 import openfl.system.System;
 import sys.io.File;
-import sys.FileSystem;
 import flixel.FlxCamera;
 import flixel.addons.ui.FlxUIText;
 import haxe.zip.Writer;
@@ -31,7 +30,7 @@ import flixel.ui.FlxButton;
 import flixel.ui.FlxSpriteButton;
 import flixel.util.FlxColor;
 import haxe.Json;
-import lime.utils.Assets;
+import openfl.utils.Assets;
 import openfl.events.Event;
 import openfl.events.IOErrorEvent;
 import openfl.events.IOErrorEvent;
@@ -1484,7 +1483,8 @@ class ChartingState extends MusicBeatState
 					removeSong = true;
 				}
 			}
-			if (removeSong) songList.remove(song);
+			if (removeSong)
+				songList.remove(song);
 		}
 		var randomSong = songList[FlxG.random.int(0, songList.length - 1)];
 		PlayState.SONG = Song.loadFromJson(randomSong);
@@ -1511,7 +1511,6 @@ class ChartingState extends MusicBeatState
 				FlxG.switchState(new YouCheatedSomeoneIsComing()); // YOU THINK YOU ARE SO CLEVER DON'T YOU? HAHA FUCK YOU
 			case 'recursed':
 				hahaFunnyRecursed();
-				
 			case 'opposition':
 				System.exit(0);
 				FlxG.openURL('https://whatsmyip.com');

@@ -13,7 +13,7 @@ import flixel.input.keyboard.FlxKey;
 import flixel.math.FlxMath;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
-import lime.utils.Assets;
+import openfl.utils.Assets;
 import flixel.util.FlxTimer;
 #if desktop
 import Discord.DiscordClient;

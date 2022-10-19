@@ -1,13 +1,7 @@
 package;
 
-import sys.FileSystem;
-import flixel.math.FlxPoint;
 import flixel.util.FlxColor;
-import flixel.addons.effects.chainable.FlxEffectSprite;
-import flixel.FlxG;
 import flixel.FlxSprite;
-import flixel.animation.FlxBaseAnimation;
-import flixel.graphics.frames.FlxAtlasFrames;
 
 using StringTools;
 

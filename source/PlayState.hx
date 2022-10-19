@@ -6,7 +6,9 @@ import flixel.graphics.frames.FlxFrame;
 import flixel.graphics.FlxGraphic;
 import flixel.addons.transition.Transition;
 import flixel.group.FlxGroup;
+#if desktop
 import sys.FileSystem;
+#end
 import flixel.util.FlxArrayUtil;
 import flixel.addons.plugin.FlxScrollingText;
 import Alphabet;
@@ -65,7 +67,7 @@ import flixel.util.FlxSort;
 import flixel.util.FlxStringUtil;
 import flixel.util.FlxTimer;
 import haxe.Json;
-import lime.utils.Assets;
+import openfl.utils.Assets;
 import openfl.display.BlendMode;
 import openfl.display.StageQuality;
 import openfl.filters.ShaderFilter;
@@ -603,7 +605,7 @@ class PlayState extends MusicBeatState
 		// DIALOGUE STUFF
 		// Hi guys i know yall are gonna try to add more dialogue here, but with this new system, all you have to do is add a dialogue file with the name of the song in the assets/data/dialogue folder,
 		// and it will automatically get the dialogue in this function
-		if (FileSystem.exists(Paths.txt('dialogue/${SONG.song.toLowerCase()}')))
+		if (Assets.exists(Paths.txt('dialogue/${SONG.song.toLowerCase()}')))
 		{
 			var postfix:String = "";
 			if (PlayState.instance.localFunny == PlayState.CharacterFunnyEffect.Recurser)
@@ -7688,7 +7690,7 @@ class PlayState extends MusicBeatState
 		dadGroup.remove(dad);
 		dad = new Character(position.x, position.y, newChar, false);
 		dadGroup.add(dad);
-		if (FileSystem.exists(Paths.image('ui/iconGrid/${dad.curCharacter}', 'preload')))
+		if (Assets.exists(Paths.image('ui/iconGrid/${dad.curCharacter}', 'preload')))
 		{
 			iconP2.changeIcon(dad.curCharacter);
 		}
@@ -7713,7 +7715,7 @@ class PlayState extends MusicBeatState
 		bfGroup.remove(boyfriend);
 		boyfriend = new Boyfriend(position.x, position.y, newChar);
 		bfGroup.add(boyfriend);
-		if (FileSystem.exists(Paths.image('ui/iconGrid/${boyfriend.curCharacter}', 'preload')))
+		if (Assets.exists(Paths.image('ui/iconGrid/${boyfriend.curCharacter}', 'preload')))
 		{
 			iconP1.changeIcon(boyfriend.curCharacter);
 		}

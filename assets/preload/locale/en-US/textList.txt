@@ -93,6 +93,8 @@ option_songBarType_SongName==Song Bar Type: Show Song Name
 option_enable_compat==Compatibility Mode OFF
 option_disable_compat==Compatibility Mode ON
 
+option_mobile_controls==Mobile Controls
+
 en-US==English
 es-US==Spanish
 pt-br==Brazilian-Portuguese

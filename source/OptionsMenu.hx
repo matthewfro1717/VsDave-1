@@ -1,5 +1,6 @@
 package;
 
+import mobile.MobileControlsSubState;
 import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import Controls.KeyboardScheme;
@@ -91,6 +92,7 @@ class OptionsMenu extends MusicBeatState
 			+ "\n" + LanguageManager.getTextString('option_change_langauge')
 			+ "\n" + (FlxG.save.data.disableFps ? LanguageManager.getTextString('option_enable_fps') : LanguageManager.getTextString('option_disable_fps'))
 			+ "\n" + (CompatTool.save.data.compatMode ? LanguageManager.getTextString('option_enable_compat') : LanguageManager.getTextString('option_disable_compat'))
+			+ "\n" + LanguageManager.getTextString('option_mobile_controls')
 			);
 
 		grpControls = new FlxTypedGroup<Alphabet>();
@@ -147,7 +149,8 @@ class OptionsMenu extends MusicBeatState
 		{
 			FlxG.save.data.offset--;
 			versionShit.text = "Offset (Left, Right): " + FlxG.save.data.offset;
-		}	
+		}
+
 		if (controls.ACCEPT)
 		{
 			grpControls.remove(grpControls.members[curSelected]);
@@ -198,6 +201,8 @@ class OptionsMenu extends MusicBeatState
 				case 11:
 					CompatTool.save.data.compatMode = !CompatTool.save.data.compatMode;
 					updateGroupControls(CompatTool.save.data.compatMode ? LanguageManager.getTextString('option_enable_compat') : LanguageManager.getTextString('option_disable_compat'), 11, 'Vertical');
+				case 12:
+					openSubState(new MobileControlsSubState());
 			}
 		}
 	}

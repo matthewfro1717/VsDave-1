@@ -110,6 +110,8 @@ option_songBarType_Song Name==Tipo da Barra de Música: Nome da Música
 option_enable_compat==Ativar o modo de compatibilidade
 option_disable_compat==Desabilitar o modo de compatibilidade
 
+option_mobile_controls==Controles Moveis
+
 cur_language==Idioma Atual
 en-US==Ingles
 es-US==Espanhol

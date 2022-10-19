@@ -101,6 +101,8 @@ option_songBarType_SongName==Tipo De Barra De Tiempo: Nombre De La Cancion
 option_enable_compat==Activar Modo de Compatibilidad
 option_disable_compat==Desactivar Modo de Compatibilidad
 
+option_mobile_controls==Controles Moviles
+
 en-US==Inglés
 es-US==Español
 pt-br==Brasilero-Portugués

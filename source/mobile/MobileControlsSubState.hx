@@ -33,17 +33,44 @@ class MobileControlsSubState extends FlxSubState
 	var bindButton:FlxButton;
 	var resetButton:FlxButton;
 
+	var bgShader:Shaders.GlitchEffect;
+	var awaitingExploitation:Bool;
+
 	override function create()
 	{
 		for (i in 0...controlsItems.length)
 			if (controlsItems[i] == MobileControls.getMode())
 				curSelected = i;
 
-		var bg:FlxSprite = new FlxSprite().makeGraphic(FlxG.width, FlxG.height,
-			FlxColor.fromHSB(FlxG.random.int(0, 359), FlxG.random.float(0, 0.8), FlxG.random.float(0.3, 1)));
-		bg.alpha = 0.6;
-		bg.scrollFactor.set();
-		add(bg);
+		var menuBG:FlxSprite = new FlxSprite();
+
+		awaitingExploitation = (FlxG.save.data.exploitationState == 'awaiting');
+
+		if (awaitingExploitation)
+		{
+			menuBG = new FlxSprite(-600, -200).loadGraphic(Paths.image('backgrounds/void/redsky', 'shared'));
+			menuBG.scrollFactor.set();
+			menuBG.antialiasing = false;
+			add(menuBG);
+
+			#if SHADERS_ENABLED
+			bgShader = new Shaders.GlitchEffect();
+			bgShader.waveAmplitude = 0.1;
+			bgShader.waveFrequency = 5;
+			bgShader.waveSpeed = 2;
+			
+			menuBG.shader = bgShader.shader;
+			#end
+		}
+		else
+		{
+			menuBG.color = 0xFFea71fd;
+			menuBG.setGraphicSize(Std.int(menuBG.width * 1.1));
+			menuBG.updateHitbox();
+			menuBG.antialiasing = true;
+			menuBG.loadGraphic(MainMenuState.randomizeBG());
+			add(menuBG);
+		}
 
 		var exitButton:FlxButton = new FlxButton(FlxG.width - 200, 50, 'Exit', function()
 		{
@@ -150,6 +177,13 @@ class MobileControlsSubState extends FlxSubState
 	override function update(elapsed:Float)
 	{
 		super.update(elapsed);
+
+		#if SHADERS_ENABLED
+		if (bgShader != null)
+		{
+			bgShader.shader.uTime.value[0] += elapsed;
+		}
+		#end
 
 		inputvari.text = controlsItems[curSelected];
 		inputvari.screenCenter(X);

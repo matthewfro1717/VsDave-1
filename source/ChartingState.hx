@@ -1,6 +1,7 @@
 package;
 
 import openfl.system.System;
+import sys.FileSystem;
 import sys.io.File;
 import flixel.FlxCamera;
 import flixel.addons.ui.FlxUIText;

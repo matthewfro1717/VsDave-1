@@ -151,6 +151,10 @@ class MusicPlayerState extends MusicBeatState
 
         HideBar();
 
+		#if mobile
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
+
         super.create();
     }
 
@@ -182,27 +186,26 @@ class MusicPlayerState extends MusicBeatState
 
         var currentTimeFormatted = FlxStringUtil.formatTime(FlxG.sound.music.time / 1000);
         var lengthFormatted = FlxStringUtil.formatTime(FlxG.sound.music.length / 1000);
+
+        #if desktop
         if (currentlyplaying)
         {
             if (songs[curSelected].hasVocals || songs[curSelected].ExternalSong)
             {
-                #if desktop
                 DiscordClient.changePresence('In The OST Menu', '\nListening To: ' +
                     CoolUtil.formatString(songs[curSelected].songName, '-') + ' | ' + 
                     currentTimeFormatted + ' / ' + lengthFormatted,
                     null);
-                #end
             }
             else
             {
-                #if desktop
                 DiscordClient.changePresence('In The OST Menu', '\nListening To: ' +
                     CoolUtil.formatString(songs[curSelected].songName, '-') + ' Instrumental | ' +
                     currentTimeFormatted + ' / ' + lengthFormatted, 
                     null);
-                #end
             }
         }
+        #end
 
         if (healthBar.percent < 20)
 			iconP1.changeState('losing');

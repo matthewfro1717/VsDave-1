@@ -96,8 +96,12 @@ class ChangeKeybinds extends MusicBeatState
 
 		camFollow = new FlxObject(FlxG.width / 2, selectableItems[curItemSelected].y);
 		FlxG.camera.follow(camFollow, 0.05);
-		
+
 		changeSelection();
+
+		#if mobile
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
 
 		super.create();
 	}

@@ -164,6 +164,11 @@ class StoryMenuState extends MusicBeatState
 		{
 			changeWeek(0);
 		}
+
+		#if mobile
+		addVirtualPad(LEFT_RIGHT, A_B);
+		#end
+
 		super.create();
 	}
 
@@ -205,7 +210,8 @@ class StoryMenuState extends MusicBeatState
 			movedBack = true;
 			FlxG.switchState(new MainMenuState());
 		}
-		if (FlxG.keys.justPressed.SEVEN && !FlxG.save.data.masterWeekUnlocked)
+
+		if (FlxG.keys.justPressed.SEVEN #if android || FlxG.android.justReleased.BACK #end && !FlxG.save.data.masterWeekUnlocked)
 		{
 			FlxG.sound.music.fadeOut(1, 0);
 			FlxG.camera.shake(0.02, 5.1);
@@ -215,7 +221,6 @@ class StoryMenuState extends MusicBeatState
 				FlxG.save.data.hasPlayedMasterWeek = false;
 				awaitingToPlayMasterWeek = true;
 				FlxG.save.flush();
-
 				FlxG.resetState();
 			});
 			FlxG.sound.play(Paths.sound('doom'));
@@ -262,7 +267,7 @@ class StoryMenuState extends MusicBeatState
 						{
 							LoadingState.loadAndSwitchState(new PlayState(), true);
 						}
-						video.playVideo(Paths.video('daveCutscene'));
+						video.playVideo(SUtil.getPath() + Paths.video('daveCutscene'));
 					case 5:
 						if (!FlxG.save.data.hasPlayedMasterWeek)
 						{

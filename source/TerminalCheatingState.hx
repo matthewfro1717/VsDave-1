@@ -67,7 +67,15 @@ class TerminalCheatingState extends FlxUIState
 	}
 	override function update(elapsed:Float)
 	{
-      if (FlxG.keys.justPressed.ENTER && FlxG.save.data.enteredTerminalCheatingState)
+      #if mobile
+      var justTouched:Bool = false;
+      
+      for (touch in FlxG.touches.list)
+         if (touch.justPressed)
+            justTouched = true;
+      #end
+
+      if (FlxG.keys.justPressed.ENTER #if mobile || justTouched #end && FlxG.save.data.enteredTerminalCheatingState)
       {
          FlxG.camera.setFilters([]);
 			onCommandsComplete();

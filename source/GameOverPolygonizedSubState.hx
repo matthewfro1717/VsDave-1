@@ -140,6 +140,10 @@ class GameOverPolygonizedSubState extends MusicBeatSubstate
 			}
 		});
 
+		#if mobile
+		addVirtualPad(NONE, A_B);
+		addPadCamera();
+		#end
 	}
 
 	override function update(elapsed:Float)

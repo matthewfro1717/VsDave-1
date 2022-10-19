@@ -557,12 +557,17 @@ class CreditsMenuState extends MusicBeatState
             }});
          }});
       }
+
+		#if mobile
+		addVirtualPad(UP_DOWN, A_B);
+		addPadCamera();
+		#end
+
 		super.create();
 	}
    
    override function update(elapsed:Float)
    {
-
       var fadeTimer:Float = 0.08;
       var upPressed = controls.UP_P;
 		var downPressed = controls.DOWN_P;

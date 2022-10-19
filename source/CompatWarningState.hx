@@ -48,7 +48,12 @@ class CompatWarningState extends MusicBeatState
         }
 
         changeSelection();
+
+		#if mobile
+		addVirtualPad(LEFT_RIGHT, A);
+		#end
     }
+
     public override function update(elapsed:Float)
     {
         var scrollSpeed:Float = 50;

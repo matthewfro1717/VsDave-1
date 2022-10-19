@@ -41,33 +41,42 @@ class OutdatedSubState extends MusicBeatState
 		txt.screenCenter();
 		txt.antialiasing = true;
 		add(txt);
+
+		#if mobile
+		addVirtualPad(LEFT_FULL, A_B_C);
+		#end
 	}
 
 	override function update(elapsed:Float)
 	{
-		if (controls.PAUSE && (FlxG.save.data.begin_thing == true || InExpungedState))
+		if (controls.ACCEPT && (FlxG.save.data.begin_thing == true || InExpungedState))
 		{
 			leaveState();
 		}
+
 		if (InExpungedState)
 		{
 			super.update(elapsed);
 			return;
 		}
-		if (FlxG.keys.justPressed.Y && FlxG.save.data.begin_thing != true || FlxG.keys.justPressed.ENTER && FlxG.save.data.begin_thing != true)
+
+		if (FlxG.keys.justPressed.Y #if mobile || virtualPad.buttonC.justPressed #end && FlxG.save.data.begin_thing != true || controls.ACCEPT && FlxG.save.data.begin_thing != true)
 		{
 			FlxG.save.data.begin_thing = true;
 			FlxG.save.data.eyesores = true;
 			leaveState();
 		}
-		if (FlxG.keys.justPressed.N && FlxG.save.data.begin_thing != true || FlxG.keys.justPressed.ENTER && FlxG.save.data.begin_thing != true)
+
+		if (FlxG.keys.justPressed.N #if mobile || virtualPad.buttonB.justPressed #end && FlxG.save.data.begin_thing != true || controls.ACCEPT && FlxG.save.data.begin_thing != true)
 		{
 			FlxG.save.data.begin_thing = true;
 			FlxG.save.data.eyesores = false;
 			leaveState();	
 		}
+
 		super.update(elapsed);
 	}
+
 	function leaveState()
 	{
 		if(!FlxG.save.data.alreadyGoneToWarningScreen)

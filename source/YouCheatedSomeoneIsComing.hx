@@ -32,17 +32,23 @@ class YouCheatedSomeoneIsComing extends FlxState //why did this extend music bea
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
+
+		#if mobile
+		var justTouched:Bool = false;
 		
-		if (FlxG.keys.pressed.ENTER)
+		for (touch in FlxG.touches.list)
+			if (touch.justPressed)
+				justTouched = true;
+		#end
+
+		if (FlxG.keys.pressed.ENTER #if mobile || justTouched #end)
 		{
 			endIt();
 		}
-		
 	}
-	
+
 	public function endIt()
 	{
         FlxG.switchState(new SusState());
 	}
-	
 }

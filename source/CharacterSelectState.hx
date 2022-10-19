@@ -75,8 +75,6 @@ class CharacterSelectState extends MusicBeatState
 
 	public var isDebug:Bool = false;
 
-	public var PressedTheFunny:Bool = false;
-
 	var selectedCharacter:Bool = false;
 
 	private var camHUD:FlxCamera;
@@ -288,6 +286,11 @@ class CharacterSelectState extends MusicBeatState
 		arrowRight.cameras = [camHUD];
 		arrows[1] = arrowRight;
 		add(arrowRight);
+		
+		#if mobile
+		addVirtualPad(LEFT_FULL, A_B);
+		addPadCamera();
+		#end
 
 		super.create();
 
@@ -373,12 +376,10 @@ class CharacterSelectState extends MusicBeatState
 		}
 		#end
 		Conductor.songPosition = FlxG.sound.music.time;
-		
-		var controlSet:Array<Bool> = [controls.LEFT_P, controls.DOWN_P, controls.UP_P, controls.RIGHT_P];
 
 		super.update(elapsed);
 
-		if (FlxG.keys.justPressed.ESCAPE)
+		if (controls.BACK)
 		{
 			if (wasInFullscreen)
 			{
@@ -399,24 +400,7 @@ class CharacterSelectState extends MusicBeatState
 			}
 		}
 		#end
-		
-		for (i in 0...controlSet.length)
-		{
-			if (controlSet[i] && !PressedTheFunny)
-			{
-				switch (i)
-				{
-					case 0:
-						char.playAnim(char.nativelyPlayable ? 'singLEFT' : 'singRIGHT', true);
-					case 1:
-						char.playAnim('singDOWN', true);
-					case 2:
-						char.playAnim('singUP', true);
-					case 3:
-						char.playAnim(char.nativelyPlayable ? 'singRIGHT' : 'singLEFT', true);
-				}
-			}
-		}
+
 		if (controls.ACCEPT)
 		{
 			if (isLocked(characters[current].forms[curForm].name))
@@ -425,14 +409,7 @@ class CharacterSelectState extends MusicBeatState
 				FlxG.sound.play(Paths.sound('badnoise1'), 0.9);
 				return;
 			}
-			if (PressedTheFunny)
-			{
-				return;
-			}
-			else
-			{
-				PressedTheFunny = true;
-			}
+
 			selectedCharacter = true;
 			var heyAnimation:Bool = char.animation.getByName("hey") != null; 
 			char.playAnim(heyAnimation ? 'hey' : 'singUP', true);
@@ -440,7 +417,8 @@ class CharacterSelectState extends MusicBeatState
 			FlxG.sound.play(Paths.sound('confirmMenu', 'preload'));
 			new FlxTimer().start(1.9, endIt);
 		}
-		if (FlxG.keys.justPressed.LEFT && !selectedCharacter)
+
+		if (controls.LEFT_P && !selectedCharacter)
 		{
 			curForm = 0;
 			current--;
@@ -453,7 +431,7 @@ class CharacterSelectState extends MusicBeatState
 			arrows[0].loadGraphic(Paths.image("ui/ArrowLeft_Pressed", "preload"));
 		}
 
-		if (FlxG.keys.justPressed.RIGHT && !selectedCharacter)
+		if (controls.RIGHT_P && !selectedCharacter)
 		{
 			curForm = 0;
 			current++;
@@ -466,12 +444,12 @@ class CharacterSelectState extends MusicBeatState
 			arrows[1].loadGraphic(Paths.image("ui/ArrowRight_Pressed", "preload"));
 		}
 		
-		if (FlxG.keys.justReleased.LEFT)
+		if (controls.LEFT_R)
 			arrows[0].loadGraphic(Paths.image("ui/ArrowLeft_Idle", "preload"));
-		if (FlxG.keys.justReleased.RIGHT)
+		if (controls.RIGHT_R)
 			arrows[1].loadGraphic(Paths.image("ui/ArrowRight_Idle", "preload"));
 
-		if (FlxG.keys.justPressed.DOWN && !selectedCharacter)
+		if (controls.DOWN_P && !selectedCharacter)
 		{
 			curForm--;
 			if (curForm < 0)
@@ -481,7 +459,8 @@ class CharacterSelectState extends MusicBeatState
 			UpdateBF();
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		}
-		if (FlxG.keys.justPressed.UP && !selectedCharacter)
+
+		if (controls.UP_P && !selectedCharacter)
 		{
 			curForm++;
 			if (curForm > characters[current].forms.length - 1)
@@ -491,6 +470,7 @@ class CharacterSelectState extends MusicBeatState
 			UpdateBF();
 			FlxG.sound.play(Paths.sound('scrollMenu'), 0.4);
 		}
+
 		#if debug
 		if (FlxG.keys.justPressed.R && !selectedCharacter)
 		{

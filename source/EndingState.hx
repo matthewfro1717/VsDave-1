@@ -22,18 +22,25 @@ class EndingState extends MusicBeatState
 	override public function create():Void 
 	{
 		super.create();
+
+		FlxG.sound.playMusic(Paths.music(_song),1,true);
+
 		var end:FlxSprite = new FlxSprite(0, 0);
 		end.loadGraphic(Paths.image("dave/endings/" + _ending));
-		FlxG.sound.playMusic(Paths.music(_song),1,true);
 		add(end);
-		FlxG.camera.fade(FlxColor.BLACK, 0.8, true);	
+
+		#if mobile
+		addVirtualPad(NONE, A);
+		#end
+
+		FlxG.camera.fade(FlxColor.BLACK, 0.8, true);
 	}
 	
 	override public function update(elapsed:Float):Void 
 	{
 		super.update(elapsed);
 		
-		if (FlxG.keys.pressed.ENTER)
+		if (controls.ACCEPT)
 		{
 			endIt();
 		}

@@ -1340,7 +1340,11 @@ class PlayState extends MusicBeatState
 			kadeEngineWatermark.cameras = [camHUD];
 		}
 		doof.cameras = [camDialogue];
-		
+
+		#if mobile
+		addMobileControls();
+		#end
+
 		#if SHADERS_ENABLED
 		if (SONG.song.toLowerCase() == 'kabunga' || localFunny == CharacterFunnyEffect.Exbungo) //i desperately wanted it so if you use downscroll it switches it to upscroll and flips the entire hud upside down but i never got to it
 		{
@@ -1355,6 +1359,7 @@ class PlayState extends MusicBeatState
 			blockedShader = new BlockedGlitchEffect(1280, 1, 1, true);
 		}
 		#end
+
 		startingSong = true;
 		if (startTimer != null && !startTimer.active)
 		{
@@ -2085,6 +2090,10 @@ class PlayState extends MusicBeatState
 	function startCountdown():Void
 	{
 		inCutscene = false;
+
+		#if mobile
+		mobileControls.visible = true;
+		#end
 
 		generateStaticArrows(0);
 		generateStaticArrows(1);
@@ -3339,7 +3348,7 @@ class PlayState extends MusicBeatState
 		{
 			scoreTxt.text += " | NO MISS!!";
 		}
-		if (FlxG.keys.justPressed.ENTER && startedCountdown && canPause)
+		if (FlxG.keys.justPressed.ENTER #if android || FlxG.android.justReleased.BACK #end && startedCountdown && canPause)
 		{
 			persistentUpdate = false;
 			persistentDraw = true;
@@ -4119,6 +4128,11 @@ class PlayState extends MusicBeatState
 	function endSong():Void
 	{
 		inCutscene = false;
+
+		#if mobile
+		mobileControls.visible = false;
+		#end
+
 		canPause = false;
 		if (MathGameState.failedGame)
 		{

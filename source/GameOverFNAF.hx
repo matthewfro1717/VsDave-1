@@ -68,6 +68,11 @@ class GameOverFNAF extends MusicBeatSubstate
 				endBullshit();
 			});
 		}
+
+		#if mobile
+		addVirtualPad(NONE, B);
+		addPadCamera();
+		#end
 	}
 
 	override function update(elapsed:Float)

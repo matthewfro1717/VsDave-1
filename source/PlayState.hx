@@ -2697,6 +2697,8 @@ class PlayState extends MusicBeatState
 		}
 
 		super.openSubState(SubState);
+
+		Paths.clearUnusedMemory();
 	}
 
 	public function throwThatBitchInThere(guyWhoComesIn:String = 'bambi', guyWhoFliesOut:String = 'dave')
@@ -2778,6 +2780,8 @@ class PlayState extends MusicBeatState
 		}
 
 		super.closeSubState();
+
+		Paths.clearUnusedMemory();
 	}
 
 	function resyncVocals():Void

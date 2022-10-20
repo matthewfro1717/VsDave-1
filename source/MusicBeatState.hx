@@ -99,7 +99,7 @@ class MusicBeatState extends FlxUIState
 	{
 		#if mobile
 		if (trackedinputs != [])
-			controls.removeAControlsInput(trackedinputs);
+			controls.removeControlsInput(trackedinputs);
 		#end
 
 		super.destroy();

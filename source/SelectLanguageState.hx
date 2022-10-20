@@ -81,6 +81,8 @@ class SelectLanguageState extends MusicBeatState
    }
    public override function update(elapsed:Float)
    {
+		super.update(elapsed);
+
       var scrollSpeed:Float = 50;
       bg.x -= scrollSpeed * elapsed;
       bg.y -= scrollSpeed * elapsed;

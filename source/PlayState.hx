@@ -436,6 +436,8 @@ class PlayState extends MusicBeatState
 	var barType:String;
 	override public function create()
 	{
+		Paths.clearStoredMemory();
+
 		instance = this;
 
 		paused = false;
@@ -1398,6 +1400,8 @@ class PlayState extends MusicBeatState
 		exbungo_funny.volume = 0.91;
 
 		super.create();
+
+		Paths.clearUnusedMemory();
 
 		Transition.nextCamera = camTransition;
 	}

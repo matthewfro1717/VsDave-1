@@ -741,7 +741,7 @@ class PlayState extends MusicBeatState
 				backgroundSprites.add(floor);
 				add(floor);
 
-				door = new BGSprite('door', 68, -152, 'backgrounds/office/door', [
+				door = new BGSprite('door', 68, -152, Paths.getSparrowAtlas('backgrounds/office/door'), [
 					new Animation('idle', 'doorLOL instance 1', 0, false, [false, false], [11]),
 					new Animation('doorShut', 'doorLOL instance 1', 24, false, [false, false], CoolUtil.numberArray(22, 11)),
 					new Animation('doorOpen', 'doorLOL instance 1', 24, false, [false, false], CoolUtil.numberArray(11, 0))
@@ -1159,7 +1159,7 @@ class PlayState extends MusicBeatState
 			add(powerMeter);
 		}
 		
-		var healthBarPath = '';
+		var healthBarPath:FlxGraphic;
 		switch (SONG.song.toLowerCase())
 		{
 			case 'exploitation':
@@ -1625,14 +1625,14 @@ class PlayState extends MusicBeatState
 				sprites.add(hills);
 				add(hills);
 
-				var corn:BGSprite = new BGSprite('corn', -1000, 120, 'backgrounds/festival/corn', [
+				var corn:BGSprite = new BGSprite('corn', -1000, 120, Paths.getSparrowAtlas('backgrounds/festival/corn'), [
 					new Animation('corn', 'idle', 5, true, [false, false])
 				], 0.85, 0.85, true, true);
 				corn.animation.play('corn');
 				sprites.add(corn);
 				add(corn);
 
-				var cornGlow:BGSprite = new BGSprite('cornGlow', -1000, 120, 'backgrounds/festival/cornGlow', [
+				var cornGlow:BGSprite = new BGSprite('cornGlow', -1000, 120, Paths.getSparrowAtlas('backgrounds/festival/cornGlow'), [
 					new Animation('cornGlow', 'idle', 5, true, [false, false])
 				], 0.85, 0.85, true, true);
 				cornGlow.blend = BlendMode.ADD;
@@ -1644,7 +1644,7 @@ class PlayState extends MusicBeatState
 				sprites.add(backGrass);
 				add(backGrass);
 				
-				var crowd = new BGSprite('crowd', -500, -150, 'backgrounds/festival/crowd', [
+				var crowd = new BGSprite('crowd', -500, -150, Paths.getSparrowAtlas('backgrounds/festival/crowd'), [
 					new Animation('idle', 'crowdDance', 24, true, [false, false])
 				], 0.85, 0.85, true, true);
 				crowd.animation.play('idle');
@@ -1654,7 +1654,7 @@ class PlayState extends MusicBeatState
 				
 				for (i in 0...mainChars.length)
 				{					
-					var crowdChar = new BGSprite(mainChars[i][0], mainChars[i][3], mainChars[i][4], 'backgrounds/festival/mainCrowd/${mainChars[i][0]}', [
+					var crowdChar = new BGSprite(mainChars[i][0], mainChars[i][3], mainChars[i][4], Paths.getSparrowAtlas('backgrounds/festival/mainCrowd/${mainChars[i][0]}'), [
 						new Animation('idle', mainChars[i][1], 24, false, [false, false], null)
 					], 0.85, 0.85, true, true);
 					crowdChar.setGraphicSize(Std.int(crowdChar.width * mainChars[i][2]));
@@ -1668,7 +1668,7 @@ class PlayState extends MusicBeatState
 				sprites.add(frontGrass);
 				add(frontGrass);
 
-				var stageGlow:BGSprite = new BGSprite('stageGlow', -450, 300, 'backgrounds/festival/generalGlow', [
+				var stageGlow:BGSprite = new BGSprite('stageGlow', -450, 300, Paths.getSparrowAtlas('backgrounds/festival/generalGlow'), [
 					new Animation('glow', 'idle', 5, true, [false, false])
 				], 0, 0, true, true);
 				stageGlow.blend = BlendMode.ADD;
@@ -1869,7 +1869,7 @@ class PlayState extends MusicBeatState
 				sprites.add(baldi);
 				add(baldi);
 
-				tristanInBotTrot = new BGSprite('tristan', 888, 688, 'backgrounds/bedroom/TristanSitting', [
+				tristanInBotTrot = new BGSprite('tristan', 888, 688, Paths.getSparrowAtlas('backgrounds/bedroom/TristanSitting'), [
 					new Animation('idle', 'daytime', 24, true, [false, false]),
 					new Animation('idleNight', 'nighttime', 24, true, [false, false])
 				], 1, 1, true, true);
@@ -1926,7 +1926,7 @@ class PlayState extends MusicBeatState
 				sprites.add(sign);
 				add(sign);
 
-				train = new BGSprite('train', -800, 500, 'california/train', [
+				train = new BGSprite('train', -800, 500, Paths.getSparrowAtlas('california/train'), [
 					new Animation('idle', 'trainRide', 24, true, [false, false])
 				], 1, 1, true, true);
 				train.animation.play('idle');
@@ -7715,7 +7715,7 @@ class PlayState extends MusicBeatState
 		dadGroup.remove(dad);
 		dad = new Character(position.x, position.y, newChar, false);
 		dadGroup.add(dad);
-		if (Assets.exists(Paths.image('ui/iconGrid/${dad.curCharacter}', 'preload')))
+		if (Paths.image('ui/iconGrid/${dad.curCharacter}', 'preload') != null)
 		{
 			iconP2.changeIcon(dad.curCharacter);
 		}
@@ -7740,7 +7740,7 @@ class PlayState extends MusicBeatState
 		bfGroup.remove(boyfriend);
 		boyfriend = new Boyfriend(position.x, position.y, newChar);
 		bfGroup.add(boyfriend);
-		if (Assets.exists(Paths.image('ui/iconGrid/${boyfriend.curCharacter}', 'preload')))
+		if (Paths.image('ui/iconGrid/${boyfriend.curCharacter}', 'preload') != null)
 		{
 			iconP1.changeIcon(boyfriend.curCharacter);
 		}

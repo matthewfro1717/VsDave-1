@@ -85,7 +85,6 @@ class MobileControlsSubState extends FlxSubState
 		exitButton.setGraphicSize(Std.int(exitButton.width) * 3);
 		exitButton.label.setFormat(Assets.getFont('assets/mobile/menu/Comic Sans MS.ttf').fontName, 16, FlxColor.WHITE, CENTER, true);
 		exitButton.color = FlxColor.YELLOW;
-		exitButton.visible = false;
 		add(exitButton);
 
 		resetButton = new FlxButton(exitButton.x, exitButton.y + 100, 'Reset', function()

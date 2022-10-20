@@ -27,38 +27,12 @@ class Main extends Sprite
 
 	// You can pretty much ignore everything from here on - your code should go in your states.
 
-	public static function main():Void
-	{
-		Lib.current.addChild(new Main());
-	}
-
 	public function new()
 	{
 		super();
 
-		if (stage != null)
-			init();
-		else
-			addEventListener(Event.ADDED_TO_STAGE, init);
-	}
+		SUtil.uncaughtErrorHandler();
 
-	private function init(?E:Event):Void
-	{
-		if (hasEventListener(Event.ADDED_TO_STAGE))
-		{
-			removeEventListener(Event.ADDED_TO_STAGE, init);
-		}
-
-		setupGame();
-	}
-
-	public static function toggleFuckedFPS(toggle:Bool)
-	{
-		fps.fuckFps = toggle;
-	}
-
-	private function setupGame():Void
-	{
 		var stageWidth:Int = Lib.current.stage.stageWidth;
 		var stageHeight:Int = Lib.current.stage.stageHeight;
 
@@ -72,13 +46,19 @@ class Main extends Sprite
 		}
 
 		initialState = StartStateSelector;
+
+		SUtil.check();
+
 		addChild(new FlxGame(gameWidth, gameHeight, initialState, zoom, framerate, framerate, skipSplash, startFullscreen));
 
-		#if !mobile
 		fps = new FpsDisplay(10, 3, 0xFFFFFF);
 		var fpsFormat = new TextFormat("Comic Sans MS Bold", 15, 0xFFFFFF, true);
 		fps.defaultTextFormat = fpsFormat;
 		addChild(fps);
-		#end
+	}
+
+	public static function toggleFuckedFPS(toggle:Bool)
+	{
+		fps.fuckFps = toggle;
 	}
 }

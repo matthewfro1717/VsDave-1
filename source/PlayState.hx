@@ -1,5 +1,8 @@
 package; // "Most hard-coded FNF mod ever!!!!!!!!!!" - p0kk0 on GameBanana(https://gamebanana.com/mods/43201?post=10328553)
 
+#if android
+import android.widget.Toast;
+#end
 import CreditsMenuState.CreditsText;
 import TerminalCheatingState.TerminalText;
 import flixel.graphics.frames.FlxFrame;
@@ -6382,7 +6385,11 @@ class PlayState extends MusicBeatState
 						}
 						#end
 					case 2083:
-						PlatformUtil.sendWindowsNotification("Anticheat.dll", "Threat expunged.dat successfully contained.");
+						#if android
+						Toast.makeText("Anticheat.dll\nThreat expunged.dat successfully contained.", Toast.LENGTH_LONG);
+						#else
+						PlatformUtil.sendWindowsNotification("Anticheat.dll", "Potential threat detected: expunged.dat");
+						#end
 				}
 			case 'shredder':
 				switch (curStep)
@@ -7040,7 +7047,11 @@ class PlayState extends MusicBeatState
 					case 1276:
 						subtitleManager.addSubtitle(LanguageManager.getTextString('exploit_sub15'), 0.02, 0.3);
 					case 1100:
+						#if android
+						Toast.makeText("Anticheat.dll\nPotential threat detected: expunged.dat", Toast.LENGTH_LONG);
+						#else
 						PlatformUtil.sendWindowsNotification("Anticheat.dll", "Potential threat detected: expunged.dat");
+						#end
 				}
 				switch (curBeat)
 				{

@@ -15,7 +15,7 @@ class MobileControls extends FlxSpriteGroup
 	public var virtualPad:FlxVirtualPad;
 	public var hitbox:FlxHitbox;
 
-	public function new()
+	public function new(usesDodge:Bool = false)
 	{
 		super();
 
@@ -34,7 +34,7 @@ class MobileControls extends FlxSpriteGroup
 				virtualPad = new FlxVirtualPad(BOTH_FULL, NONE);
 				add(virtualPad);
 			case 'Hitbox':
-				hitbox = new FlxHitbox();
+				hitbox = new FlxHitbox(usesDodge ? SPACE : DEFAULT);
 				add(hitbox);
 			case 'Keyboard': // do nothing
 		}
@@ -147,5 +147,22 @@ class MobileControls extends FlxSpriteGroup
 		}
 
 		return virtualPad;
+	}
+
+	public static function setSpaceButtonPosition(positions:FlxPoint):Void
+	{
+		FlxG.save.data.spaceButtonPosition = positions;
+		FlxG.save.flush();
+	}
+
+	public static function getSpaceButtonPosition():FlxPoint
+	{
+		if (FlxG.save.data.spaceButtonPosition == null)
+		{
+			FlxG.save.data.spaceButtonPosition = new FlxPoint(FlxG.width - 132, FlxG.height - 135);
+			FlxG.save.flush();
+		}
+
+		return FlxG.save.data.spaceButtonPosition;
 	}
 }

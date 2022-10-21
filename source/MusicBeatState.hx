@@ -47,9 +47,9 @@ class MusicBeatState extends FlxUIState
 			remove(virtualPad);
 	}
 
-	public function addMobileControls(DefaultDrawTarget:Bool = true)
+	public function addMobileControls(usesDodge:Bool = false, DefaultDrawTarget:Bool = true)
 	{
-		mobileControls = new MobileControls();
+		mobileControls = new MobileControls(usesDodge);
 
 		switch (MobileControls.getMode())
 		{
@@ -58,7 +58,7 @@ class MusicBeatState extends FlxUIState
 			case 'Pad-Duo':
 				controls.setVirtualPad(mobileControls.virtualPad, BOTH_FULL, NONE);
 			case 'Hitbox':
-				controls.setHitBox(mobileControls.hitbox);
+				controls.setHitBox(mobileControls.hitbox, usesDodge ? SPACE : DEFAULT);
 			case 'Keyboard': // do nothing
 		}
 
@@ -72,6 +72,12 @@ class MusicBeatState extends FlxUIState
 		mobileControls.cameras = [camControls];
 		mobileControls.visible = false;
 		add(mobileControls);
+
+		if (usesDodge && (MobileControls.getMode() != 'Hitbox' || MobileControls.getMode() != 'Keyboard'))
+		{
+			addVirtualPad(NONE, SPACE);
+			virtualPad.cameras = [camControls];
+		}
 	}
 
 	public function removeMobileControls()

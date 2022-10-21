@@ -1,11 +1,16 @@
 package mobile.flixel;
 
-import mobile.flixel.FlxButton;
-import flash.display.Shape;
 import flash.display.BitmapData;
+import flash.display.Shape;
 import flixel.FlxG;
-import flixel.util.FlxDestroyUtil;
 import flixel.group.FlxSpriteGroup;
+import mobile.flixel.FlxButton;
+
+enum FlxHitboxType
+{
+	DEFAULT;
+	SPACE;
+}
 
 /**
  * A zone with 4 hint's (A hitbox).
@@ -19,18 +24,29 @@ class FlxHitbox extends FlxSpriteGroup
 	public var buttonDown:FlxButton = new FlxButton(0, 0);
 	public var buttonUp:FlxButton = new FlxButton(0, 0);
 	public var buttonRight:FlxButton = new FlxButton(0, 0);
+	public var buttonSpace:FlxButton = new FlxButton(0, 0);
 
 	/**
 	 * Create the zone.
 	 */
-	public function new()
+	public function new(type:FlxHitboxType)
 	{
 		super();
 
-		add(buttonLeft = createHint(0, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF00FF));
-		add(buttonDown = createHint(FlxG.width / 4, 0, Std.int(FlxG.width / 4), FlxG.height, 0x00FFFF));
-		add(buttonUp = createHint(FlxG.width / 2, 0, Std.int(FlxG.width / 4), FlxG.height, 0x00FF00));
-		add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF0000));
+		switch (type)
+		{
+			case SPACE:
+				add(buttonLeft = createHint(0, 0, Std.int(FlxG.width / 4), Std.int(FlxG.height / 4) * 3, 0xFF00FF));
+				add(buttonDown = createHint(FlxG.width / 4, 0, Std.int(FlxG.width / 4), Std.int(FlxG.height / 4) * 3, 0x00FFFF));
+				add(buttonUp = createHint(FlxG.width / 2, 0, Std.int(FlxG.width / 4), Std.int(FlxG.height / 4) * 3, 0x00FF00));
+				add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), 0, Std.int(FlxG.width / 4), Std.int(FlxG.height / 4) * 3, 0xFF0000));
+				add(buttonSpace = createHint(0, Std.int(FlxG.height / 4) * 3, FlxG.width, Std.int(FlxG.height / 4), 0xFF00DD));
+			case DEFAULT:
+				add(buttonLeft = createHint(0, 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF00FF));
+				add(buttonDown = createHint(FlxG.width / 4, 0, Std.int(FlxG.width / 4), FlxG.height, 0x00FFFF));
+				add(buttonUp = createHint(FlxG.width / 2, 0, Std.int(FlxG.width / 4), FlxG.height, 0x00FF00));
+				add(buttonRight = createHint((FlxG.width / 2) + (FlxG.width / 4), 0, Std.int(FlxG.width / 4), FlxG.height, 0xFF0000));
+		}
 
 		scrollFactor.set();
 	}

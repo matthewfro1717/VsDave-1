@@ -108,6 +108,8 @@ class ChangeKeybinds extends MusicBeatState
 
 	override function update(elapsed:Float)
 	{
+		super.update(elapsed);
+
 		var left = controls.LEFT_P;
 		var down = controls.DOWN_P;
 		var up = controls.UP_P;

@@ -1347,7 +1347,7 @@ class PlayState extends MusicBeatState
 		doof.cameras = [camDialogue];
 
 		#if mobile
-		addMobileControls();
+		addMobileControls((SONG.song.toLowerCase() == 'polygonized' || SONG.song.toLowerCase() == 'interdimensional') && localFunny != CharacterFunnyEffect.Recurser);
 		#end
 
 		#if SHADERS_ENABLED
@@ -4709,7 +4709,6 @@ class PlayState extends MusicBeatState
 		var right = controls.RIGHT;
 		var down = controls.DOWN;
 		var left = controls.LEFT;
-
 		var key5 = controls.KEY5 && (SONG.song.toLowerCase() == 'polygonized' || SONG.song.toLowerCase() == 'interdimensional') && localFunny != CharacterFunnyEffect.Recurser;
 
 		/*if (pressingKey5Global != key5)
@@ -4717,7 +4716,7 @@ class PlayState extends MusicBeatState
 			pressingKey5Global = key5;
 			regenerateStaticArrows(1, false);
 		}*/
-		
+
 		playerStrums.forEach(function(strum:StrumNote)
 		{
 			//trace('global: $pressingKey5Global, none global: ${strum.pressingKey5}');

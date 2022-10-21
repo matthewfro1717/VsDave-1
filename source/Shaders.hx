@@ -464,7 +464,6 @@ class DitherShader extends FlxShader
     #if SHADERS_ENABLED
     @:glFragmentSource('
         #pragma header
-        #extension GL_ARB_arrays_of_arrays : require
         // Ordered dithering aka Bayer matrix dithering
 
         float Scale = 1.0;
@@ -490,6 +489,7 @@ class DitherShader extends FlxShader
 
 
         if(c0 < limit)
+        {
             return 0.0;
             return 1.0;
         }
@@ -515,7 +515,6 @@ class DitherShader extends FlxShader
         }
     ')
     #end
-
     public function new()
     {
         super();

@@ -395,7 +395,7 @@ class FreeplayState extends MusicBeatState
 		changeSelection();
 
 		#if mobile
-		addVirtualPad(LEFT_FULL, A_B);
+		addVirtualPad(UP_DOWN, A_B_C);
 		#end
 	}
 
@@ -642,7 +642,7 @@ class FreeplayState extends MusicBeatState
 						PlayState.storyWeek = songs[curSelected].week;
 						
 						packTransitionDone = false;
-						if ((FlxG.keys.pressed.CONTROL || skipSelect.contains(PlayState.SONG.song.toLowerCase())) && PlayState.SONG.song.toLowerCase() != 'exploitation')
+						if (((FlxG.keys.pressed.CONTROL #if mobile || virtualPad.buttonC.pressed #end) || skipSelect.contains(PlayState.SONG.song.toLowerCase())) && PlayState.SONG.song.toLowerCase() != 'exploitation')
 						{
 							LoadingState.loadAndSwitchState(new PlayState());
 						}

@@ -739,11 +739,11 @@ class PlayState extends MusicBeatState
 				add(gfGroup);
 				add(bfGroup);
 
-				var floor:BGSprite = new BGSprite('frontFloor', -689, 525, Paths.image('backgrounds/office/floor'), null, 1, 1);
+				var floor:BGSprite = new BGSprite('frontFloor', -689, 525, 'backgrounds/office/floor', null, 1, 1);
 				backgroundSprites.add(floor);
 				add(floor);
 
-				door = new BGSprite('door', 68, -152, Paths.getSparrowAtlas('backgrounds/office/door'), [
+				door = new BGSprite('door', 68, -152, 'backgrounds/office/door', [
 					new Animation('idle', 'doorLOL instance 1', 0, false, [false, false], [11]),
 					new Animation('doorShut', 'doorLOL instance 1', 24, false, [false, false], CoolUtil.numberArray(22, 11)),
 					new Animation('doorOpen', 'doorLOL instance 1', 24, false, [false, false], CoolUtil.numberArray(11, 0))
@@ -752,11 +752,11 @@ class PlayState extends MusicBeatState
 				backgroundSprites.add(door);
 				add(door);
 
-				var frontWall:BGSprite = new BGSprite('frontWall', -716, -381, Paths.image('backgrounds/office/frontWall'), null, 1, 1);
+				var frontWall:BGSprite = new BGSprite('frontWall', -716, -381, 'backgrounds/office/frontWall', null, 1, 1);
 				backgroundSprites.add(frontWall);
 				add(frontWall);
 
-				doorButton = new BGSprite('doorButton', 521, 61, Paths.image('fiveNights/btn_doorOpen'), null, 1, 1);
+				doorButton = new BGSprite('doorButton', 521, 61, 'fiveNights/btn_doorOpen', null, 1, 1);
 				backgroundSprites.add(doorButton);
 				add(doorButton);
 
@@ -1006,11 +1006,11 @@ class PlayState extends MusicBeatState
 			case 'bedroom':
 				if (FlxG.random.int(0, 99) == 0)
 				{
-					var ruby:BGSprite = new BGSprite('ruby', -697, 0, Paths.image('backgrounds/bedroom/ruby', 'shared'), null, 1, 1, true);
+					var ruby:BGSprite = new BGSprite('ruby', -697, 0, 'backgrounds/bedroom/ruby', null, 1, 1, true);
 					backgroundSprites.add(ruby);
 					add(ruby);	
 				}
-				var tv:BGSprite = new BGSprite('tv', -697, 955, Paths.image('backgrounds/bedroom/tv', 'shared'), null, 1.2, 1.2, true);
+				var tv:BGSprite = new BGSprite('tv', -697, 955, 'backgrounds/bedroom/tv', null, 1.2, 1.2, true);
 				backgroundSprites.add(tv);
 				add(tv);
 		}
@@ -1431,29 +1431,29 @@ class PlayState extends MusicBeatState
 						stageName = 'daveHouse_sunset';
 						skyType = 'sky_sunset';
 				}
-				var bg:BGSprite = new BGSprite('bg', -600, -300, Paths.image('backgrounds/shared/${skyType}'), null, 0.6, 0.6);
+				var bg:BGSprite = new BGSprite('bg', -600, -300, 'backgrounds/shared/${skyType}', null, 0.6, 0.6);
 				sprites.add(bg);
 				add(bg);
 				
-				var stageHills:BGSprite = new BGSprite('stageHills', -834, -159, Paths.image('backgrounds/dave-house/${assetType}hills'), null, 0.7, 0.7);
+				var stageHills:BGSprite = new BGSprite('stageHills', -834, -159, 'backgrounds/dave-house/${assetType}hills', null, 0.7, 0.7);
 				sprites.add(stageHills);
 				add(stageHills);
 
-				var grassbg:BGSprite = new BGSprite('grassbg', -1205, 580, Paths.image('backgrounds/dave-house/${assetType}grass bg'), null);
+				var grassbg:BGSprite = new BGSprite('grassbg', -1205, 580, 'backgrounds/dave-house/${assetType}grass bg', null);
 				sprites.add(grassbg);
 				add(grassbg);
 	
-				var gate:BGSprite = new BGSprite('gate', -755, 250, Paths.image('backgrounds/dave-house/${assetType}gate'), null);
+				var gate:BGSprite = new BGSprite('gate', -755, 250, 'backgrounds/dave-house/${assetType}gate', null);
 				sprites.add(gate);
 				add(gate);
 	
-				var stageFront:BGSprite = new BGSprite('stageFront', -832, 505, Paths.image('backgrounds/dave-house/${assetType}grass'), null);
+				var stageFront:BGSprite = new BGSprite('stageFront', -832, 505, 'backgrounds/dave-house/${assetType}grass', null);
 				sprites.add(stageFront);
 				add(stageFront);
 
 				if (SONG.song.toLowerCase() == 'insanity' || localFunny == CharacterFunnyEffect.Recurser)
 				{
-					var bg:BGSprite = new BGSprite('bg', -600, -200, Paths.image('backgrounds/void/redsky_insanity'), null, 1, 1, true, true);
+					var bg:BGSprite = new BGSprite('bg', -600, -200, 'backgrounds/void/redsky_insanity', null, 1, 1, true, true);
 					bg.alpha = 0.75;
 					bg.visible = false;
 					add(bg);
@@ -1473,7 +1473,7 @@ class PlayState extends MusicBeatState
 				bgZoom = 0.6;
 				stageName = 'insideHouse';
 
-				var bg:BGSprite = new BGSprite('bg', -1000, -350, Paths.image('backgrounds/inside_house'), null);
+				var bg:BGSprite = new BGSprite('bg', -1000, -350, 'backgrounds/inside_house', null);
 				sprites.add(bg);
 				add(bg);
 
@@ -1492,18 +1492,18 @@ class PlayState extends MusicBeatState
 	
 				var skyType:String = stageName == 'bambiFarmNight' ? 'sky_night' : stageName == 'bambiFarmSunset' ? 'sky_sunset' : 'sky';
 				
-				var bg:BGSprite = new BGSprite('bg', -600, -200, Paths.image('backgrounds/shared/' + skyType), null, 0.6, 0.6);
+				var bg:BGSprite = new BGSprite('bg', -600, -200, 'backgrounds/shared/' + skyType, null, 0.6, 0.6);
 				sprites.add(bg);
 				add(bg);
 
 				if (SONG.song.toLowerCase() == 'maze')
 				{
-					var sunsetBG:BGSprite = new BGSprite('sunsetBG', -600, -200, Paths.image('backgrounds/shared/sky_sunset'), null, 0.6, 0.6);
+					var sunsetBG:BGSprite = new BGSprite('sunsetBG', -600, -200, 'backgrounds/shared/sky_sunset', null, 0.6, 0.6);
 					sunsetBG.alpha = 0;
 					sprites.add(sunsetBG);
 					add(sunsetBG);
 
-					var nightBG:BGSprite = new BGSprite('nightBG', -600, -200, Paths.image('backgrounds/shared/sky_night'), null, 0.6, 0.6);
+					var nightBG:BGSprite = new BGSprite('nightBG', -600, -200, 'backgrounds/shared/sky_night', null, 0.6, 0.6);
 					nightBG.alpha = 0;
 					sprites.add(nightBG);
 					add(nightBG);
@@ -1512,33 +1512,33 @@ class PlayState extends MusicBeatState
 						health -= 0.2;
 					}
 				}
-				var flatgrass:BGSprite = new BGSprite('flatgrass', 350, 75, Paths.image('backgrounds/farm/gm_flatgrass'), null, 0.65, 0.65);
+				var flatgrass:BGSprite = new BGSprite('flatgrass', 350, 75, 'backgrounds/farm/gm_flatgrass', null, 0.65, 0.65);
 				flatgrass.setGraphicSize(Std.int(flatgrass.width * 0.34));
 				flatgrass.updateHitbox();
 				sprites.add(flatgrass);
 				
-				var hills:BGSprite = new BGSprite('hills', -173, 100, Paths.image('backgrounds/farm/orangey hills'), null, 0.65, 0.65);
+				var hills:BGSprite = new BGSprite('hills', -173, 100, 'backgrounds/farm/orangey hills', null, 0.65, 0.65);
 				sprites.add(hills);
 				
-				var farmHouse:BGSprite = new BGSprite('farmHouse', 100, 125, Paths.image('backgrounds/farm/funfarmhouse', 'shared'), null, 0.7, 0.7);
+				var farmHouse:BGSprite = new BGSprite('farmHouse', 100, 125, 'backgrounds/farm/funfarmhouse', null, 0.7, 0.7);
 				farmHouse.setGraphicSize(Std.int(farmHouse.width * 0.9));
 				farmHouse.updateHitbox();
 				sprites.add(farmHouse);
 
-				var grassLand:BGSprite = new BGSprite('grassLand', -600, 500, Paths.image('backgrounds/farm/grass lands', 'shared'), null);
+				var grassLand:BGSprite = new BGSprite('grassLand', -600, 500, 'backgrounds/farm/grass lands', null);
 				sprites.add(grassLand);
 
-				var cornFence:BGSprite = new BGSprite('cornFence', -400, 200, Paths.image('backgrounds/farm/cornFence', 'shared'), null);
+				var cornFence:BGSprite = new BGSprite('cornFence', -400, 200, 'backgrounds/farm/cornFence', null);
 				sprites.add(cornFence);
 				
-				var cornFence2:BGSprite = new BGSprite('cornFence2', 1100, 200, Paths.image('backgrounds/farm/cornFence2', 'shared'), null);
+				var cornFence2:BGSprite = new BGSprite('cornFence2', 1100, 200, 'backgrounds/farm/cornFence2', null);
 				sprites.add(cornFence2);
 
 				var bagType = FlxG.random.int(0, 1000) == 0 ? 'popeye' : 'cornbag';
-				var cornBag:BGSprite = new BGSprite('cornFence2', 1200, 550, Paths.image('backgrounds/farm/$bagType', 'shared'), null);
+				var cornBag:BGSprite = new BGSprite('cornFence2', 1200, 550, 'backgrounds/farm/$bagType', null);
 				sprites.add(cornBag);
 				
-				var sign:BGSprite = new BGSprite('sign', 0, 350, Paths.image('backgrounds/farm/sign', 'shared'), null);
+				var sign:BGSprite = new BGSprite('sign', 0, 350, 'backgrounds/farm/sign', null);
 				sprites.add(sign);
 
 				var variantColor:FlxColor = getBackgroundColor(stageName);
@@ -1564,7 +1564,7 @@ class PlayState extends MusicBeatState
 				if (['blocked', 'corn-theft', 'maze', 'mealie', 'indignancy'].contains(SONG.song.toLowerCase()) && !MathGameState.failedGame && FlxG.random.int(0, 4) == 0)
 				{
 					FlxG.mouse.visible = true;
-					baldi = new BGSprite('baldi', 400, 110, Paths.image('backgrounds/farm/baldo', 'shared'), null, 0.65, 0.65);
+					baldi = new BGSprite('baldi', 400, 110, 'backgrounds/farm/baldo', null, 0.65, 0.65);
 					baldi.setGraphicSize(Std.int(baldi.width * 0.31));
 					baldi.updateHitbox();
 					baldi.color = variantColor;
@@ -1574,7 +1574,7 @@ class PlayState extends MusicBeatState
 
 				if (SONG.song.toLowerCase() == 'splitathon')
 				{
-					var picnic:BGSprite = new BGSprite('picnic', 1050, 650, Paths.image('backgrounds/farm/picnic_towel_thing', 'shared'), null);
+					var picnic:BGSprite = new BGSprite('picnic', 1050, 650, 'backgrounds/farm/picnic_towel_thing', null);
 					sprites.insert(sprites.members.indexOf(cornBag), picnic);
 					picnic.color = variantColor;
 					insert(members.indexOf(cornBag), picnic);
@@ -1613,30 +1613,30 @@ class PlayState extends MusicBeatState
 							['tristan', 'bop', 0.4, 800, 325]
 						];
 				}
-				var bg:BGSprite = new BGSprite('bg', -600, -230, Paths.image('backgrounds/shared/sky_festival'), null, 0.6, 0.6);
+				var bg:BGSprite = new BGSprite('bg', -600, -230, 'backgrounds/shared/sky_festival', null, 0.6, 0.6);
 				sprites.add(bg);
 				add(bg);
 
-				var flatGrass:BGSprite = new BGSprite('flatGrass', 800, -100, Paths.image('backgrounds/festival/gm_flatgrass'), null, 0.7, 0.7);
+				var flatGrass:BGSprite = new BGSprite('flatGrass', 800, -100, 'backgrounds/festival/gm_flatgrass', null, 0.7, 0.7);
 				sprites.add(flatGrass);
 				add(flatGrass);
 
-				var farmHouse:BGSprite = new BGSprite('farmHouse', -300, -150, Paths.image('backgrounds/festival/farmHouse'), null, 0.7, 0.7);
+				var farmHouse:BGSprite = new BGSprite('farmHouse', -300, -150, 'backgrounds/festival/farmHouse', null, 0.7, 0.7);
 				sprites.add(farmHouse);
 				add(farmHouse);
 				
-				var hills:BGSprite = new BGSprite('hills', -1000, -100, Paths.image('backgrounds/festival/hills'), null, 0.7, 0.7);
+				var hills:BGSprite = new BGSprite('hills', -1000, -100, 'backgrounds/festival/hills', null, 0.7, 0.7);
 				sprites.add(hills);
 				add(hills);
 
-				var corn:BGSprite = new BGSprite('corn', -1000, 120, Paths.getSparrowAtlas('backgrounds/festival/corn'), [
+				var corn:BGSprite = new BGSprite('corn', -1000, 120, 'backgrounds/festival/corn', [
 					new Animation('corn', 'idle', 5, true, [false, false])
 				], 0.85, 0.85, true, true);
 				corn.animation.play('corn');
 				sprites.add(corn);
 				add(corn);
 
-				var cornGlow:BGSprite = new BGSprite('cornGlow', -1000, 120, Paths.getSparrowAtlas('backgrounds/festival/cornGlow'), [
+				var cornGlow:BGSprite = new BGSprite('cornGlow', -1000, 120, 'backgrounds/festival/cornGlow', [
 					new Animation('cornGlow', 'idle', 5, true, [false, false])
 				], 0.85, 0.85, true, true);
 				cornGlow.blend = BlendMode.ADD;
@@ -1644,11 +1644,11 @@ class PlayState extends MusicBeatState
 				sprites.add(cornGlow);
 				add(cornGlow);
 				
-				var backGrass:BGSprite = new BGSprite('backGrass', -1000, 475, Paths.image('backgrounds/festival/backGrass'), null, 0.85, 0.85);
+				var backGrass:BGSprite = new BGSprite('backGrass', -1000, 475, 'backgrounds/festival/backGrass', null, 0.85, 0.85);
 				sprites.add(backGrass);
 				add(backGrass);
 				
-				var crowd = new BGSprite('crowd', -500, -150, Paths.getSparrowAtlas('backgrounds/festival/crowd'), [
+				var crowd = new BGSprite('crowd', -500, -150, 'backgrounds/festival/crowd', [
 					new Animation('idle', 'crowdDance', 24, true, [false, false])
 				], 0.85, 0.85, true, true);
 				crowd.animation.play('idle');
@@ -1658,7 +1658,7 @@ class PlayState extends MusicBeatState
 				
 				for (i in 0...mainChars.length)
 				{					
-					var crowdChar = new BGSprite(mainChars[i][0], mainChars[i][3], mainChars[i][4], Paths.getSparrowAtlas('backgrounds/festival/mainCrowd/${mainChars[i][0]}'), [
+					var crowdChar = new BGSprite(mainChars[i][0], mainChars[i][3], mainChars[i][4], 'backgrounds/festival/mainCrowd/${mainChars[i][0]}', [
 						new Animation('idle', mainChars[i][1], 24, false, [false, false], null)
 					], 0.85, 0.85, true, true);
 					crowdChar.setGraphicSize(Std.int(crowdChar.width * mainChars[i][2]));
@@ -1668,11 +1668,11 @@ class PlayState extends MusicBeatState
 					add(crowdChar);
 				}
 				
-				var frontGrass:BGSprite = new BGSprite('frontGrass', -1300, 600, Paths.image('backgrounds/festival/frontGrass'), null, 1, 1);
+				var frontGrass:BGSprite = new BGSprite('frontGrass', -1300, 600, 'backgrounds/festival/frontGrass', null, 1, 1);
 				sprites.add(frontGrass);
 				add(frontGrass);
 
-				var stageGlow:BGSprite = new BGSprite('stageGlow', -450, 300, Paths.getSparrowAtlas('backgrounds/festival/generalGlow'), [
+				var stageGlow:BGSprite = new BGSprite('stageGlow', -450, 300, 'backgrounds/festival/generalGlow', [
 					new Animation('glow', 'idle', 5, true, [false, false])
 				], 0, 0, true, true);
 				stageGlow.blend = BlendMode.ADD;
@@ -1684,44 +1684,44 @@ class PlayState extends MusicBeatState
 				bgZoom = 0.7;
 				stageName = 'backyard';
 
-				var festivalSky:BGSprite = new BGSprite('bg', -600, -400, Paths.image('backgrounds/shared/sky_festival'), null, 0.6, 0.6);
+				var festivalSky:BGSprite = new BGSprite('bg', -600, -400, 'backgrounds/shared/sky_festival', null, 0.6, 0.6);
 				sprites.add(festivalSky);
 				add(festivalSky);
 
 				if (SONG.song.toLowerCase() == 'rano')
 				{
-					var sunriseBG:BGSprite = new BGSprite('sunriseBG', -600, -400, Paths.image('backgrounds/shared/sky_sunrise'), null, 0.6, 0.6);
+					var sunriseBG:BGSprite = new BGSprite('sunriseBG', -600, -400, 'backgrounds/shared/sky_sunrise', null, 0.6, 0.6);
 					sunriseBG.alpha = 0;
 					sprites.add(sunriseBG);
 					add(sunriseBG);
 
-					var skyBG:BGSprite = new BGSprite('bg', -600, -400, Paths.image('backgrounds/shared/sky'), null, 0.6, 0.6);
+					var skyBG:BGSprite = new BGSprite('bg', -600, -400, 'backgrounds/shared/sky', null, 0.6, 0.6);
 					skyBG.alpha = 0;
 					sprites.add(skyBG);
 					add(skyBG);
 				}
 
-				var hills:BGSprite = new BGSprite('hills', -1330, -432, Paths.image('backgrounds/backyard/hills', 'shared'), null, 0.75, 0.75, true);
+				var hills:BGSprite = new BGSprite('hills', -1330, -432, 'backgrounds/backyard/hills', null, 0.75, 0.75, true);
 				sprites.add(hills);
 				add(hills);
 
-				var grass:BGSprite = new BGSprite('grass', -800, 150, Paths.image('backgrounds/backyard/supergrass', 'shared'), null, 1, 1, true);
+				var grass:BGSprite = new BGSprite('grass', -800, 150, 'backgrounds/backyard/supergrass', null, 1, 1, true);
 				sprites.add(grass);
 				add(grass);
 
-				var gates:BGSprite = new BGSprite('gates', 564, -33, Paths.image('backgrounds/backyard/gates', 'shared'), null, 1, 1, true);
+				var gates:BGSprite = new BGSprite('gates', 564, -33, 'backgrounds/backyard/gates', null, 1, 1, true);
 				sprites.add(gates);
 				add(gates);
 				
-				var bear:BGSprite = new BGSprite('bear', -1035, -710, Paths.image('backgrounds/backyard/bearDude', 'shared'), null, 0.95, 0.95, true);
+				var bear:BGSprite = new BGSprite('bear', -1035, -710, 'backgrounds/backyard/bearDude', null, 0.95, 0.95, true);
 				sprites.add(bear);
 				add(bear);
 
-				var house:BGSprite = new BGSprite('house', -1025, -323, Paths.image('backgrounds/backyard/house', 'shared'), null, 0.95, 0.95, true);
+				var house:BGSprite = new BGSprite('house', -1025, -323, 'backgrounds/backyard/house', null, 0.95, 0.95, true);
 				sprites.add(house);
 				add(house);
 
-				var grill:BGSprite = new BGSprite('grill', -489, 452, Paths.image('backgrounds/backyard/grill', 'shared'), null, 0.95, 0.95, true);
+				var grill:BGSprite = new BGSprite('grill', -489, 452, 'backgrounds/backyard/grill', null, 0.95, 0.95, true);
 				sprites.add(grill);
 				add(grill);
 
@@ -1775,7 +1775,7 @@ class PlayState extends MusicBeatState
 				bgZoom = 0.6;
 				stageName = 'interdimension';
 
-				var bg:BGSprite = new BGSprite('void', -700, -350, Paths.image('backgrounds/void/interdimensions/interdimensionVoid'), null, 1, 1, false, true);
+				var bg:BGSprite = new BGSprite('void', -700, -350, 'backgrounds/void/interdimensions/interdimensionVoid', null, 1, 1, false, true);
 				bg.setGraphicSize(Std.int(bg.width * 1.75));
 				sprites.add(bg);
 				add(bg);
@@ -1786,7 +1786,7 @@ class PlayState extends MusicBeatState
 
 				for (char in ['ball', 'bimpe', 'maldo', 'memes kids', 'muko', 'ruby man', 'tristan', 'bambi'])
 				{
-					var bgChar = new FlyingBGChar(char, Paths.image('backgrounds/festival/scaredCrowd/$char'));
+					var bgChar = new FlyingBGChar(char, 'backgrounds/festival/scaredCrowd/$char');
 					sprites.add(bgChar);
 					flyingBgChars.add(bgChar);
 				}
@@ -1795,16 +1795,16 @@ class PlayState extends MusicBeatState
 				bgZoom = 0.7;
 				stageName = 'kabunga';
 				
-				var bg:BGSprite = new BGSprite('bg', -320, -160, Paths.image('backgrounds/void/exbongo/Exbongo'), null, 1, 1, true, true);
+				var bg:BGSprite = new BGSprite('bg', -320, -160, 'backgrounds/void/exbongo/Exbongo', null, 1, 1, true, true);
 				bg.setGraphicSize(Std.int(bg.width * 1.5));
 				sprites.add(bg);
 				add(bg);
 
-				var circle:BGSprite = new BGSprite('circle', -30, 550, Paths.image('backgrounds/void/exbongo/Circle'), null);
+				var circle:BGSprite = new BGSprite('circle', -30, 550, 'backgrounds/void/exbongo/Circle', null);
 				sprites.add(circle);	
 				add(circle);
 
-				place = new BGSprite('place', 860, -15, Paths.image('backgrounds/void/exbongo/Place'), null);
+				place = new BGSprite('place', 860, -15, 'backgrounds/void/exbongo/Place', null);
 				sprites.add(place);	
 				add(place);
 				
@@ -1813,20 +1813,20 @@ class PlayState extends MusicBeatState
 				bgZoom = 1;
 				stageName = 'rapLand';
 
-				var bg:BGSprite = new BGSprite('rapBG', -640, -360, Paths.image('backgrounds/rapBattle'), null);
+				var bg:BGSprite = new BGSprite('rapBG', -640, -360, 'backgrounds/rapBattle', null);
 				sprites.add(bg);
 				add(bg);
 			case 'freeplay':
 				bgZoom = 0.4;
 				stageName = 'freeplay';
 				
-				darkSky = new BGSprite('darkSky', darkSkyStartPos, 0, Paths.image('recursed/darkSky'), null, 1, 1, true);
+				darkSky = new BGSprite('darkSky', darkSkyStartPos, 0, 'recursed/darkSky', null, 1, 1, true);
 				darkSky.scale.set((1 / bgZoom) * 2, 1 / bgZoom);
 				darkSky.updateHitbox();
 				darkSky.y = (FlxG.height - darkSky.height) / 2;
 				add(darkSky);
 				
-				darkSky2 = new BGSprite('darkSky', darkSky.x - darkSky.width, 0, Paths.image('recursed/darkSky'), null, 1, 1, true);
+				darkSky2 = new BGSprite('darkSky', darkSky.x - darkSky.width, 0, 'recursed/darkSky', null, 1, 1, true);
 				darkSky2.scale.set((1 / bgZoom) * 2, 1 / bgZoom);
 				darkSky2.updateHitbox();
 				darkSky2.x = darkSky.x - darkSky.width;
@@ -1853,7 +1853,7 @@ class PlayState extends MusicBeatState
 			case 'roof':
 				bgZoom = 0.8;
 				stageName = 'roof';
-				var roof:BGSprite = new BGSprite('roof', -584, -397, Paths.image('backgrounds/gm_house5', 'shared'), null, 1, 1, true);
+				var roof:BGSprite = new BGSprite('roof', -584, -397, 'backgrounds/gm_house5', null, 1, 1, true);
 				roof.setGraphicSize(Std.int(roof.width * 2));
 				roof.antialiasing = false;
 				add(roof);
@@ -1861,19 +1861,19 @@ class PlayState extends MusicBeatState
 				bgZoom = 0.8;
 				stageName = 'bedroom';
 				
-				var sky:BGSprite = new BGSprite('nightSky', -285, 318, Paths.image('backgrounds/bedroom/sky', 'shared'), null, 0.8, 0.8, true);
+				var sky:BGSprite = new BGSprite('nightSky', -285, 318, 'backgrounds/bedroom/sky', null, 0.8, 0.8, true);
 				sprites.add(sky);
 				add(sky);
 
-				var bg:BGSprite = new BGSprite('bg', -687, 0, Paths.image('backgrounds/bedroom/bg', 'shared'), null, 1, 1, true);
+				var bg:BGSprite = new BGSprite('bg', -687, 0, 'backgrounds/bedroom/bg', null, 1, 1, true);
 				sprites.add(bg);
 				add(bg);
 
-				var baldi:BGSprite = new BGSprite('baldi', 788, 788, Paths.image('backgrounds/bedroom/bed', 'shared'), null, 1, 1, true);
+				var baldi:BGSprite = new BGSprite('baldi', 788, 788, 'backgrounds/bedroom/bed', null, 1, 1, true);
 				sprites.add(baldi);
 				add(baldi);
 
-				tristanInBotTrot = new BGSprite('tristan', 888, 688, Paths.getSparrowAtlas('backgrounds/bedroom/TristanSitting'), [
+				tristanInBotTrot = new BGSprite('tristan', 888, 688, 'backgrounds/bedroom/TristanSitting', [
 					new Animation('idle', 'daytime', 24, true, [false, false]),
 					new Animation('idleNight', 'nighttime', 24, true, [false, false])
 				], 1, 1, true, true);
@@ -1887,50 +1887,50 @@ class PlayState extends MusicBeatState
 				bgZoom = 0.9;
 				stageName = 'office';
 				
-				var backFloor:BGSprite = new BGSprite('backFloor', -500, -310, Paths.image('backgrounds/office/backFloor'), null, 1, 1);
+				var backFloor:BGSprite = new BGSprite('backFloor', -500, -310, 'backgrounds/office/backFloor', null, 1, 1);
 				sprites.add(backFloor);
 				add(backFloor);
 			case 'desert':
 				bgZoom = 0.5;
 				stageName = 'desert';
 
-				var bg:BGSprite = new BGSprite('bg', -900, -400, Paths.image('backgrounds/shared/sky'), null, 0.2, 0.2);
+				var bg:BGSprite = new BGSprite('bg', -900, -400, 'backgrounds/shared/sky', null, 0.2, 0.2);
 				bg.setGraphicSize(Std.int(bg.width * 2));
 				bg.updateHitbox();
 				sprites.add(bg);
 				add(bg);
 
-				var sunsetBG:BGSprite = new BGSprite('sunsetBG', -900, -400, Paths.image('backgrounds/shared/sky_sunset'), null, 0.2, 0.2);
+				var sunsetBG:BGSprite = new BGSprite('sunsetBG', -900, -400, 'backgrounds/shared/sky_sunset', null, 0.2, 0.2);
 				sunsetBG.setGraphicSize(Std.int(sunsetBG.width * 2));
 				sunsetBG.updateHitbox();
 				sunsetBG.alpha = 0;
 				sprites.add(sunsetBG);
 				add(sunsetBG);
 				
-				var nightBG:BGSprite = new BGSprite('nightBG', -900, -400, Paths.image('backgrounds/shared/sky_night'), null, 0.2, 0.2);
+				var nightBG:BGSprite = new BGSprite('nightBG', -900, -400, 'backgrounds/shared/sky_night', null, 0.2, 0.2);
 				nightBG.setGraphicSize(Std.int(nightBG.width * 2));
 				nightBG.updateHitbox();
 				nightBG.alpha = 0;
 				sprites.add(nightBG);
 				add(nightBG);
 				
-				desertBG = new BGSprite('desert', -786, -500, Paths.image('backgrounds/wedcape_from_cali_backlground', 'shared'), null, 1, 1, true);
+				desertBG = new BGSprite('desert', -786, -500, 'backgrounds/wedcape_from_cali_backlground', null, 1, 1, true);
 				desertBG.setGraphicSize(Std.int(desertBG.width * 1.2));
 				desertBG.updateHitbox();
 				sprites.add(desertBG);
 				add(desertBG);
 
-				desertBG2 = new BGSprite('desert2', desertBG.x - desertBG.width, desertBG.y, Paths.image('backgrounds/wedcape_from_cali_backlground', 'shared'), null, 1, 1, true);
+				desertBG2 = new BGSprite('desert2', desertBG.x - desertBG.width, desertBG.y, 'backgrounds/wedcape_from_cali_backlground', null, 1, 1, true);
 				desertBG2.setGraphicSize(Std.int(desertBG2.width * 1.2));
 				desertBG2.updateHitbox();
 				sprites.add(desertBG2);
 				add(desertBG2);
 				
-				sign = new BGSprite('sign', 500, 450, Paths.image('california/leavingCalifornia', 'shared'), null, 1, 1, true);
+				sign = new BGSprite('sign', 500, 450, 'california/leavingCalifornia', null, 1, 1, true);
 				sprites.add(sign);
 				add(sign);
 
-				train = new BGSprite('train', -800, 500, Paths.getSparrowAtlas('california/train'), [
+				train = new BGSprite('train', -800, 500, 'california/train', [
 					new Animation('idle', 'trainRide', 24, true, [false, false])
 				], 1, 1, true, true);
 				train.animation.play('idle');
@@ -1943,42 +1943,43 @@ class PlayState extends MusicBeatState
 				bgZoom = 0.4;
 				stageName = 'master';
 
-				var space:BGSprite = new BGSprite('space', -1724, -971, Paths.image('backgrounds/shared/sky_space'), null, 1.2, 1.2);
+				var space:BGSprite = new BGSprite('space', -1724, -971, 'backgrounds/shared/sky_space', null, 1.2, 1.2);
 				space.setGraphicSize(Std.int(space.width * 10));
 				space.antialiasing = false;
 				sprites.add(space);
 				add(space);
 	
-				var land:BGSprite = new BGSprite('land', 675, 555, Paths.image('backgrounds/dave-house/land'), null, 0.9, 0.9);
+				var land:BGSprite = new BGSprite('land', 675, 555, 'backgrounds/dave-house/land', null, 0.9, 0.9);
 				sprites.add(land);
 				add(land);
 			case 'overdrive':
 				bgZoom = 0.8;
 				stageName = 'overdrive';
 
-				var stfu:BGSprite = new BGSprite('stfu', -583, -383, Paths.image('backgrounds/stfu'), null, 1, 1);
+				var stfu:BGSprite = new BGSprite('stfu', -583, -383, 'backgrounds/stfu', null, 1, 1);
 				sprites.add(stfu);
 				add(stfu);
 			default:
 				bgZoom = 0.9;
 				stageName = 'stage';
 
-				var bg:BGSprite = new BGSprite('bg', -600, -200, Paths.image('backgrounds/stage/stageback'), null, 0.9, 0.9);
+				var bg:BGSprite = new BGSprite('bg', -600, -200, 'backgrounds/stage/stageback', null, 0.9, 0.9);
 				sprites.add(bg);
 				add(bg);
 	
-				var stageFront:BGSprite = new BGSprite('stageFront', -650, 600, Paths.image('backgrounds/stage/stagefront'), null, 0.9, 0.9);
+				var stageFront:BGSprite = new BGSprite('stageFront', -650, 600, 'backgrounds/stage/stagefront', null, 0.9, 0.9);
 				stageFront.setGraphicSize(Std.int(stageFront.width * 1.1));
 				stageFront.updateHitbox();
 				sprites.add(stageFront);
 				add(stageFront);
 	
-				var stageCurtains:BGSprite = new BGSprite('stageCurtains', -500, -300, Paths.image('backgrounds/stage/stagecurtains'), null, 1.3, 1.3);
+				var stageCurtains:BGSprite = new BGSprite('stageCurtains', -500, -300, 'backgrounds/stage/stagecurtains', null, 1.3, 1.3);
 				stageCurtains.setGraphicSize(Std.int(stageCurtains.width * 0.9));
 				stageCurtains.updateHitbox();
 				sprites.add(stageCurtains);
 				add(stageCurtains);
 		}
+
 		if (!revertedBG)
 		{
 			defaultCamZoom = bgZoom;
@@ -2081,12 +2082,12 @@ class PlayState extends MusicBeatState
 				interdimensionBG.setPosition(-200, 0);
 				interdimensionBG.setGraphicSize(Std.int(interdimensionBG.width * 2.75));
 
-				nimbiLand = new BGSprite('nimbiLand', 200, 100, Paths.image('backgrounds/void/interdimensions/nimbi/nimbi_land'), null, 1, 1, false, true);
+				nimbiLand = new BGSprite('nimbiLand', 200, 100, 'backgrounds/void/interdimensions/nimbi/nimbi_land', null, 1, 1, false, true);
 				backgroundSprites.add(nimbiLand);
 				nimbiLand.setGraphicSize(Std.int(nimbiLand.width * 1.5));
 				insert(members.indexOf(flyingBgChars), nimbiLand);
 
-				nimbiSign = new BGSprite('sign', 800, -73, Paths.image('backgrounds/void/interdimensions/nimbi/sign'), null, 1, 1, false, true);
+				nimbiSign = new BGSprite('sign', 800, -73, 'backgrounds/void/interdimensions/nimbi/sign', null, 1, 1, false, true);
 				backgroundSprites.add(nimbiSign);
 				nimbiSign.setGraphicSize(Std.int(nimbiSign.width * 0.2));
 				insert(members.indexOf(flyingBgChars), nimbiSign);
@@ -7305,7 +7306,7 @@ class PlayState extends MusicBeatState
 						remove(desertBG2);
 						
 					
-						georgia = new BGSprite('georgia', 400, -50, Paths.image('california/geor gea', 'shared'), null, 1, 1, true);
+						georgia = new BGSprite('georgia', 400, -50, 'california/geor gea', null, 1, 1, true);
 						georgia.setGraphicSize(Std.int(georgia.width * 2.5));
 						georgia.updateHitbox();
 						georgia.color = nightColor;

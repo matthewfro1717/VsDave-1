@@ -180,25 +180,25 @@ class CharacterSelectState extends MusicBeatState
 		}
 		add(bg);
 
-		var hills:BGSprite = new BGSprite('hills', -133, 52, Paths.image('backgrounds/charSelect/hills'), null, 1, 1);
+		var hills:BGSprite = new BGSprite('hills', -133, 52, 'backgrounds/charSelect/hills', null, 1, 1);
 		add(hills);
 
-		var house:BGSprite = new BGSprite('house', 385, 78, Paths.image('backgrounds/charSelect/house'), null, 1, 1);
+		var house:BGSprite = new BGSprite('house', 385, 78, 'backgrounds/charSelect/house', null, 1, 1);
 		add(house);
 
-		var behindGrass:BGSprite = new BGSprite('behindGrass', -33, 468, Paths.image('backgrounds/charSelect/behindGrass'), null, 1, 1);
+		var behindGrass:BGSprite = new BGSprite('behindGrass', -33, 468, 'backgrounds/charSelect/behindGrass', null, 1, 1);
 		add(behindGrass);
 
-		var gateLeft:BGSprite = new BGSprite('gateLeft', -38, 464, Paths.image('backgrounds/charSelect/gateLeft'), null, 1, 1);
+		var gateLeft:BGSprite = new BGSprite('gateLeft', -38, 464, 'backgrounds/charSelect/gateLeft', null, 1, 1);
 		add(gateLeft);
 
-		var gateRight:BGSprite = new BGSprite('gateRight', 1014, 464, Paths.image('backgrounds/charSelect/gateRight'), null, 1, 1);
+		var gateRight:BGSprite = new BGSprite('gateRight', 1014, 464, 'backgrounds/charSelect/gateRight', null, 1, 1);
 		add(gateRight);
 		
-		var grass:BGSprite = new BGSprite('grass', -80, 385, Paths.image('backgrounds/charSelect/grass'), null, 1, 1);
+		var grass:BGSprite = new BGSprite('grass', -80, 385, 'backgrounds/charSelect/grass', null, 1, 1);
 		add(grass);
 		
-		var frontGrass:BGSprite = new BGSprite('frontGrass', -185, 382, Paths.image('backgrounds/charSelect/frontGrass'), null, 1, 1);
+		var frontGrass:BGSprite = new BGSprite('frontGrass', -185, 382, 'backgrounds/charSelect/frontGrass', null, 1, 1);
 		add(frontGrass);
 		
 		var varientColor = 0xFF878787;
@@ -245,6 +245,7 @@ class CharacterSelectState extends MusicBeatState
 		characterText.y = FlxG.height - 180;
 		add(characterText);
 		
+		#if debug
 		var resetText = new FlxText(FlxG.width, FlxG.height, LanguageManager.getTextString('character_reset'));
 		resetText.setFormat(Paths.font("comic.ttf"), 30, FlxColor.WHITE, LEFT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
 		resetText.autoSize = false;
@@ -255,6 +256,7 @@ class CharacterSelectState extends MusicBeatState
 		resetText.cameras = [camHUD];
 		resetText.antialiasing = true;
 		add(resetText);
+		#end
 
 		funnyIconMan = new HealthIcon('bf', true);
 		funnyIconMan.cameras = [camHUD];
@@ -287,7 +289,7 @@ class CharacterSelectState extends MusicBeatState
 		add(arrowRight);
 		
 		#if mobile
-		addVirtualPad(LEFT_FULL, A_B);
+		addVirtualPad(LEFT_FULL, A_B_C);
 		addPadCamera();
 		#end
 

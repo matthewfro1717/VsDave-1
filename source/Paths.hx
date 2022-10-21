@@ -150,6 +150,7 @@ class Paths
 	inline static public function txt(key:String, ?library:String):String
 	{
 		var defaultReturnPath = getPath('data/$key.txt', TEXT, library);
+
 		if (isLocale())
 		{
 			var langaugeReturnPath = getPath('locale/${LanguageManager.save.data.language}/data/$key.txt', TEXT, library);

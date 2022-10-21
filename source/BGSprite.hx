@@ -8,7 +8,7 @@ using StringTools;
 class BGSprite extends FlxSprite
 {
 	public var spriteName:String;
-	public function new(spriteName:String, posX:Float, posY:Float, content:Dynamic, animations:Array<Animation>, scrollX:Float = 1, scrollY:Float = 1, antialiasing:Bool = true, active:Bool = false)
+	public function new(spriteName:String, posX:Float, posY:Float, path:String, animations:Array<Animation>, scrollX:Float = 1, scrollY:Float = 1, antialiasing:Bool = true, active:Bool = false)
 	{
 		super(posX, posY);
 
@@ -19,7 +19,7 @@ class BGSprite extends FlxSprite
 		{
 			if (hasAnimations)
 			{
-				frames = content;
+				frames = Paths.getSparrowAtlas(path);
 				for (i in 0...animations.length)
 				{
 					var curAnim = animations[i];
@@ -38,7 +38,7 @@ class BGSprite extends FlxSprite
 			}
 			else
 			{
-				loadGraphic(content);
+				loadGraphic(Paths.image(path));
 			}
 		}
 		this.antialiasing = antialiasing;

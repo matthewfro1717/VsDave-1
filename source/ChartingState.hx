@@ -39,6 +39,7 @@ import openfl.events.IOErrorEvent;
 import openfl.media.Sound;
 import openfl.net.FileReference;
 import openfl.utils.ByteArray;
+import openfl.utils.Assets;
 
 using StringTools;
 
@@ -1464,8 +1465,16 @@ class ChartingState extends MusicBeatState
 
 	public static function hahaFunnyRecursed()
 	{
-		var songList = FileSystem.readDirectory('assets/songs');
-		for (song in FileSystem.readDirectory('assets/songs'))
+		var songList:Array<String> = [];
+		for (song in Assets.list(SOUND).filter(song -> song.contains('assets/songs')))
+		{
+			// simulating da FileSystem.readDirectory?
+			song.replace('assets/songs/', '').replace('/Inst.${Paths.SOUND_EXT}', '').replace('/Voices.${Paths.SOUND_EXT}', '');
+			if (!songList.contains(song) && !song.contains('extern'))
+				songList.push(song);
+		}
+
+		for (song in songList)
 		{
 			var removeSong = false;
 
@@ -1480,24 +1489,20 @@ class ChartingState extends MusicBeatState
 				['roofs', FlxG.save.data.roofsUnlocked],
 				['vs-dave-rap-two', FlxG.save.data.vsDaveRapTwoFound]
 			];
+
 			for (songCheck in songCheckThing)
-			{
 				if (song == songCheck[0] && !songCheck[1])
-				{
 					removeSong = true;
-				}
-			}
+
 			if (removeSong)
 				songList.remove(song);
 		}
-		var randomSong = songList[FlxG.random.int(0, songList.length - 1)];
-		PlayState.SONG = Song.loadFromJson(randomSong);
 
+		PlayState.SONG = Song.loadFromJson(songList[FlxG.random.int(0, songList.length - 1)]);
 		PlayState.characteroverride = "none";
 		PlayState.formoverride = "none";
 		PlayState.recursedStaticWeek = true;
-
-		FlxG.switchState(new PlayState());
+		LoadingState.loadAndSwitchState(new PlayState());
 	}
 
 	function loadJson(song:String):Void

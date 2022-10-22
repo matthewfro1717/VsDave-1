@@ -73,7 +73,7 @@ class MusicBeatState extends FlxUIState
 		mobileControls.visible = false;
 		add(mobileControls);
 
-		if (usesDodge && (MobileControls.getMode() != 'Hitbox' || MobileControls.getMode() != 'Keyboard'))
+		if (usesDodge && (MobileControls.getMode() != 'Hitbox' && MobileControls.getMode() != 'Keyboard'))
 		{
 			addVirtualPad(NONE, SPACE);
 			virtualPad.cameras = [camControls];

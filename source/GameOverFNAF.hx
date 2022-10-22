@@ -71,7 +71,7 @@ class GameOverFNAF extends MusicBeatSubstate
 
 		#if mobile
 		addVirtualPad(NONE, B);
-		addPadCamera();
+		addVirtualPadCamera();
 		#end
 	}
 

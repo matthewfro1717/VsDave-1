@@ -562,7 +562,7 @@ class CreditsMenuState extends MusicBeatState
 
 		#if mobile
 		addVirtualPad(UP_DOWN, A_B);
-		addPadCamera();
+		addVirtualPadCamera();
 		#end
 
 		super.create();

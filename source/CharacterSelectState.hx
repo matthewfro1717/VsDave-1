@@ -289,8 +289,12 @@ class CharacterSelectState extends MusicBeatState
 		add(arrowRight);
 		
 		#if mobile
+		#if debug
 		addVirtualPad(LEFT_FULL, A_B_C);
-		addPadCamera();
+		#else
+		addVirtualPad(LEFT_FULL, A_B);
+		#end
+		addVirtualPadCamera();
 		#end
 
 		super.create();
@@ -476,7 +480,7 @@ class CharacterSelectState extends MusicBeatState
 		}
 
 		#if debug
-		if (FlxG.keys.justPressed.R && !selectedCharacter)
+		if (FlxG.keys.justPressed.R #if mobile || virtualPad.buttonC.justPressed #end && !selectedCharacter)
 		{
 			reset();
 			FlxG.resetState();

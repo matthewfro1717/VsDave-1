@@ -87,8 +87,8 @@ class FlxHitbox extends FlxSpriteGroup
 		hint.alpha = 0.00001;
 		hint.onDown.callback = function()
 		{
-			if (hint.alpha != MobileControls.getOpacity(true))
-				hint.alpha = MobileControls.getOpacity(true);
+			if (hint.alpha != 0.2)
+				hint.alpha = 0.2;
 		}
 		hint.onUp.callback = function()
 		{

@@ -26,7 +26,8 @@ class MusicBeatState extends FlxUIState
 	#if mobile
 	var mobileControls:MobileControls;
 	var virtualPad:FlxVirtualPad;
-	var trackedinputs:Array<FlxActionInput> = [];
+	var trackedinputsVirtualPad:Array<FlxActionInput> = [];
+	var trackedinputsMobileControls:Array<FlxActionInput> = [];
 
 	public function addVirtualPad(DPad:FlxDPadMode, Action:FlxActionMode)
 	{
@@ -34,14 +35,14 @@ class MusicBeatState extends FlxUIState
 		add(virtualPad);
 
 		controls.setVirtualPad(virtualPad, DPad, Action);
-		trackedinputs = controls.trackedinputs;
+		trackedinputsVirtualPad = controls.trackedinputs;
 		controls.trackedinputs = [];
 	}
 
 	public function removeVirtualPad()
 	{
-		if (trackedinputs != [])
-			controls.removeControlsInput(trackedinputs);
+		if (trackedinputsVirtualPad != [])
+			controls.removeControlsInput(trackedinputsVirtualPad);
 
 		if (virtualPad != null)
 			remove(virtualPad);
@@ -51,7 +52,7 @@ class MusicBeatState extends FlxUIState
 	{
 		mobileControls = new MobileControls(usesDodge);
 
-		switch (MobileControls.getMode())
+		switch (MobileControls.mode)
 		{
 			case 'Pad-Right' | 'Pad-Left' | 'Pad-Custom':
 				controls.setVirtualPad(mobileControls.virtualPad, RIGHT_FULL, NONE);
@@ -62,7 +63,7 @@ class MusicBeatState extends FlxUIState
 			case 'Keyboard': // do nothing
 		}
 
-		trackedinputs = controls.trackedinputs;
+		trackedinputsMobileControls = controls.trackedinputs;
 		controls.trackedinputs = [];
 
 		var camControls:FlxCamera = new FlxCamera();
@@ -73,7 +74,7 @@ class MusicBeatState extends FlxUIState
 		mobileControls.visible = false;
 		add(mobileControls);
 
-		if (usesDodge && (MobileControls.getMode() != 'Hitbox' && MobileControls.getMode() != 'Keyboard'))
+		if (usesDodge && (MobileControls.mode != 'Hitbox' && MobileControls.mode != 'Keyboard'))
 		{
 			addVirtualPad(NONE, SPACE);
 			virtualPad.cameras = [camControls];
@@ -82,14 +83,14 @@ class MusicBeatState extends FlxUIState
 
 	public function removeMobileControls()
 	{
-		if (trackedinputs != [])
-			controls.removeControlsInput(trackedinputs);
+		if (trackedinputsMobileControls != [])
+			controls.removeControlsInput(trackedinputsMobileControls);
 
 		if (mobileControls != null)
 			remove(mobileControls);
 	}
 
-	public function addPadCamera(DefaultDrawTarget:Bool = true)
+	public function addVirtualPadCamera(DefaultDrawTarget:Bool = true)
 	{
 		if (virtualPad != null)
 		{
@@ -104,8 +105,11 @@ class MusicBeatState extends FlxUIState
 	override function destroy()
 	{
 		#if mobile
-		if (trackedinputs != [])
-			controls.removeControlsInput(trackedinputs);
+		if (trackedinputsVirtualPad != [])
+			controls.removeControlsInput(trackedinputsVirtualPad);
+
+		if (trackedinputsMobileControls != [])
+			controls.removeControlsInput(trackedinputsMobileControls);
 		#end
 
 		super.destroy();

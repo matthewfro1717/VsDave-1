@@ -1,8 +1,5 @@
 package mobile;
 
-import mobile.flixel.FlxButton;
-import mobile.flixel.FlxHitbox;
-import mobile.flixel.FlxVirtualPad;
 import flixel.FlxG;
 import flixel.FlxSprite;
 import flixel.FlxSubState;
@@ -10,15 +7,26 @@ import flixel.addons.transition.FlxTransitionableState;
 import flixel.graphics.frames.FlxAtlasFrames;
 import flixel.group.FlxSpriteGroup;
 import flixel.input.touch.FlxTouch;
+import flixel.math.FlxPoint;
 import flixel.text.FlxText;
 import flixel.util.FlxColor;
 import flixel.util.FlxSave;
-import flixel.math.FlxPoint;
+import mobile.flixel.FlxButton;
+import mobile.flixel.FlxHitbox;
+import mobile.flixel.FlxVirtualPad;
 import openfl.utils.Assets;
 
 class MobileControlsSubState extends FlxSubState
 {
-	final controlsItems:Array<String> = ['Pad-Right', 'Pad-Left', 'Pad-Custom', 'Pad-Duo', 'Hitbox', 'Keyboard', 'Space-Button'];
+	final controlsItems:Array<String> = [
+		'Pad-Right',
+		'Pad-Left',
+		'Pad-Custom',
+		'Pad-Duo',
+		'Hitbox',
+		'Keyboard',
+		'Space-Button'
+	];
 	var virtualPad:FlxVirtualPad;
 	var hitbox:FlxHitbox;
 	var upPozition:FlxText;
@@ -43,7 +51,7 @@ class MobileControlsSubState extends FlxSubState
 	override function create()
 	{
 		for (i in 0...controlsItems.length)
-			if (controlsItems[i] == MobileControls.getMode())
+			if (controlsItems[i] == MobileControls.mode)
 				curSelected = i;
 
 		var menuBG:FlxSprite = new FlxSprite();
@@ -62,7 +70,7 @@ class MobileControlsSubState extends FlxSubState
 			bgShader.waveAmplitude = 0.1;
 			bgShader.waveFrequency = 5;
 			bgShader.waveSpeed = 2;
-			
+
 			menuBG.shader = bgShader.shader;
 			#end
 		}
@@ -80,10 +88,10 @@ class MobileControlsSubState extends FlxSubState
 		{
 			if (controlsItems[Math.floor(curSelected)] != 'Space-Button')
 			{
-				MobileControls.setMode(controlsItems[Math.floor(curSelected)]);
+				MobileControls.mode = controlsItems[Math.floor(curSelected)];
 
 				if (controlsItems[Math.floor(curSelected)] == 'Pad-Custom')
-					MobileControls.setCustomMode(virtualPad);
+					MobileControls.customVirtualPad = virtualPad;
 			}
 
 			FlxTransitionableState.skipNextTransOut = true;
@@ -96,17 +104,10 @@ class MobileControlsSubState extends FlxSubState
 
 		resetButton = new FlxButton(exitButton.x, exitButton.y + 100, 'Reset', function()
 		{
-			if (resetButton.visible && virtualPad != null) // being sure about something
-			{
-				virtualPad.buttonUp.x = FlxG.width - 258;
-				virtualPad.buttonUp.y = FlxG.height - 408;
-				virtualPad.buttonDown.x = FlxG.width - 258;
-				virtualPad.buttonDown.y = FlxG.height - 201;
-				virtualPad.buttonRight.x = FlxG.width - 132;
-				virtualPad.buttonRight.y = FlxG.height - 309;
-				virtualPad.buttonLeft.x = FlxG.width - 384;
-				virtualPad.buttonLeft.y = FlxG.height - 309;
-			}
+			if (controlsItems[Math.floor(curSelected)] == 'Pad-Custom' && resetButton.visible)
+				MobileControls.customVirtualPad = new FlxVirtualPad(RIGHT_FULL, NONE);
+			else if (controlsItems[Math.floor(curSelected)] == 'Space-Button' && resetButton.visible)
+				MobileControls.spaceButtonPositions = new FlxPoint(FlxG.width - 132, FlxG.height - 135);
 		});
 		resetButton.setGraphicSize(Std.int(resetButton.width) * 3);
 		resetButton.label.setFormat(Assets.getFont('assets/mobile/menu/Comic Sans MS.ttf').fontName, 16, FlxColor.WHITE, CENTER, true);
@@ -117,7 +118,7 @@ class MobileControlsSubState extends FlxSubState
 		savePositionsButton = new FlxButton(FlxG.width - exitButton.x, exitButton.y, 'Save Positions', function()
 		{
 			if (savePositionsButton.visible && virtualPad != null) // being sure about something
-				MobileControls.setSpaceButtonPosition(new FlxPoint(virtualPad.buttonSpace.x, virtualPad.buttonSpace.y));
+				MobileControls.spaceButtonPositions = new FlxPoint(virtualPad.buttonSpace.x, virtualPad.buttonSpace.y);
 		});
 		savePositionsButton.setGraphicSize(Std.int(savePositionsButton.width) * 3);
 		savePositionsButton.label.setFormat(Assets.getFont('assets/mobile/menu/Comic Sans MS.ttf').fontName, 16, FlxColor.WHITE, CENTER, true);
@@ -149,15 +150,13 @@ class MobileControlsSubState extends FlxSubState
 		add(inputvari);
 
 		leftArrow = new FlxSprite(inputvari.x - 60, inputvari.y - 25);
-		leftArrow.frames = FlxAtlasFrames.fromSparrow(Assets.getBitmapData('assets/mobile/menu/arrows.png'),
-			Assets.getText('assets/mobile/menu/arrows.xml'));
+		leftArrow.frames = FlxAtlasFrames.fromSparrow(Assets.getBitmapData('assets/mobile/menu/arrows.png'), Assets.getText('assets/mobile/menu/arrows.xml'));
 		leftArrow.animation.addByPrefix('idle', 'arrow left');
 		leftArrow.animation.play('idle');
 		add(leftArrow);
 
 		rightArrow = new FlxSprite(inputvari.x + inputvari.width + 10, inputvari.y - 25);
-		rightArrow.frames = FlxAtlasFrames.fromSparrow(Assets.getBitmapData('assets/mobile/menu/arrows.png'),
-			Assets.getText('assets/mobile/menu/arrows.xml'));
+		rightArrow.frames = FlxAtlasFrames.fromSparrow(Assets.getBitmapData('assets/mobile/menu/arrows.png'), Assets.getText('assets/mobile/menu/arrows.xml'));
 		rightArrow.animation.addByPrefix('idle', 'arrow right');
 		rightArrow.animation.play('idle');
 		add(rightArrow);
@@ -317,7 +316,7 @@ class MobileControlsSubState extends FlxSubState
 			case 'Pad-Custom':
 				hitbox.visible = false;
 				remove(virtualPad);
-				virtualPad = MobileControls.getCustomMode(new FlxVirtualPad(RIGHT_FULL, NONE));
+				virtualPad = MobileControls.customVirtualPad;
 				add(virtualPad);
 			case 'Pad-Duo':
 				hitbox.visible = false;
@@ -338,7 +337,7 @@ class MobileControlsSubState extends FlxSubState
 		}
 
 		funitext.visible = daChoice == 'Keyboard';
-		resetButton.visible = daChoice == 'Pad-Custom';
+		resetButton.visible = (daChoice == 'Pad-Custom' || daChoice == 'Space-Button');
 		upPozition.visible = daChoice == 'Pad-Custom';
 		downPozition.visible = daChoice == 'Pad-Custom';
 		leftPozition.visible = daChoice == 'Pad-Custom';

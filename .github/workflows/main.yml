@@ -66,8 +66,8 @@ jobs:
       - name: Publish Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
-          name: androidBuild
-          path: export/release/android/bin/app/build/outputs/apk/debug
+          name: androidBuild-debug
+          path: export/debug/android/bin/app/build/outputs/apk/debug
   Android-Release:
     runs-on: ubuntu-latest
     steps:
@@ -126,5 +126,5 @@ jobs:
       - name: Publish Artifact
         uses: actions/upload-artifact@v2.2.4
         with:
-          name: androidBuild
+          name: androidBuild-release
           path: export/release/android/bin/app/build/outputs/apk/debug

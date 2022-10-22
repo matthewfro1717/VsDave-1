@@ -155,7 +155,7 @@ class FlxVirtualPad extends FlxSpriteGroup
 				add(buttonZ = createButton(FlxG.width - 132, FlxG.height - 255, 132, 127, 'z', 0xCCB98E));
 				add(buttonA = createButton(FlxG.width - 132, FlxG.height - 135, 132, 127, 'a', 0xFF0000));
 			case SPACE:
-				add(buttonSpace = createButton(MobileControls.getSpaceButtonPosition().x, MobileControls.getSpaceButtonPosition().y, 132, 127, 's', 0xFF00DD));
+				add(buttonSpace = createButton(MobileControls.spaceButtonPositions.x, MobileControls.spaceButtonPositions.y, 132, 127, 's', 0xFF00DD));
 			case NONE: // do nothing
 		}
 

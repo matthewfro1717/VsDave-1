@@ -61,21 +61,7 @@ class MobileControls extends FlxSpriteGroup
 		}
 	}
 
-	public static function set_opacity(opacity:Float, isHitbox:Bool = false):Void
-	{
-		if (!isHitbox)
-		{
-			FlxG.save.data.virtualPadOpacity = opacity;
-			FlxG.save.flush();
-		}
-		else
-		{
-			FlxG.save.data.hitboxOpacity = opacity;
-			FlxG.save.flush();
-		}
-	}
-
-	public static function set_mode(mode:String = 'Pad-Right'):String
+	private function set_mode(mode:String = 'Pad-Right'):String
 	{
 		FlxG.save.data.controlsMode = mode;
 		FlxG.save.flush();
@@ -83,7 +69,7 @@ class MobileControls extends FlxSpriteGroup
 		return mode;
 	}
 
-	public static function get_mode():String
+	private function get_mode():String
 	{
 		if (FlxG.save.data.controlsMode == null)
 		{
@@ -94,7 +80,7 @@ class MobileControls extends FlxSpriteGroup
 		return FlxG.save.data.controlsMode;
 	}
 
-	public static function set_customVirtualPad(virtualPad:FlxVirtualPad):FlxVirtualPad
+	private function set_customVirtualPad(virtualPad:FlxVirtualPad):FlxVirtualPad
 	{
 		if (FlxG.save.data.buttons == null)
 		{
@@ -119,7 +105,7 @@ class MobileControls extends FlxSpriteGroup
 		return virtualPad;
 	}
 
-	public static function get_customVirtualPad():FlxVirtualPad
+	private function get_customVirtualPad():FlxVirtualPad
 	{
 		var virtualPad:FlxVirtualPad = new FlxVirtualPad(RIGHT_FULL, NONE);
 		if (FlxG.save.data.buttons == null)
@@ -136,7 +122,7 @@ class MobileControls extends FlxSpriteGroup
 		return virtualPad;
 	}
 
-	public static function set_spaceButtonPositions(positions:FlxPoint):FlxPoint
+	private function set_spaceButtonPositions(positions:FlxPoint):FlxPoint
 	{
 		FlxG.save.data.spaceButtonPosition = positions;
 		FlxG.save.flush();
@@ -144,7 +130,7 @@ class MobileControls extends FlxSpriteGroup
 		return positions;
 	}
 
-	public static function get_spaceButtonPositions():FlxPoint
+	private function get_spaceButtonPositions():FlxPoint
 	{
 		if (FlxG.save.data.spaceButtonPosition == null)
 		{

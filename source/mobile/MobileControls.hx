@@ -130,7 +130,7 @@ class MobileControls extends FlxSpriteGroup
 		return positions;
 	}
 
-	private static static function get_spaceButtonPositions():FlxPoint
+	private static function get_spaceButtonPositions():FlxPoint
 	{
 		if (FlxG.save.data.spaceButtonPosition == null)
 		{

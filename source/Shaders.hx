@@ -501,7 +501,7 @@ class DitherShader extends FlxShader
             int x = int(mod(xy.x, 8.0));
             int y = int(mod(xy.y, 8.0));
 
-            vec4 finalRGB;
+            vec4 finalRGB = rgba;
             finalRGB.r = find_closest(x, y, rgba.r);
             finalRGB.g = find_closest(x, y, rgba.g);
             finalRGB.b = find_closest(x, y, rgba.b);

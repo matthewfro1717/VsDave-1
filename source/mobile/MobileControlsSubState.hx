@@ -114,7 +114,7 @@ class MobileControlsSubState extends FlxSubState
 		resetButton.visible = false;
 		add(resetButton);
 
-		savePositionsButton = new FlxButton(FlxG.width - exitButton.x, exitButton.y + 100, 'Save Positions', function()
+		savePositionsButton = new FlxButton(FlxG.width - exitButton.x, exitButton.y, 'Save Positions', function()
 		{
 			if (savePositionsButton.visible && virtualPad != null) // being sure about something
 				MobileControls.setSpaceButtonPosition(new FlxPoint(virtualPad.buttonSpace.x, virtualPad.buttonSpace.y));

@@ -420,7 +420,7 @@ class MainMenuState extends MusicBeatState
 					switch (optionShit[curSelected])
 					{
 						case 'discord':
-							fancyOpenURL("https://www.discord.gg/vsdave");
+							FlxG.openURL("https://www.discord.gg/vsdave");
 					}
 				}
 				else
@@ -454,7 +454,7 @@ class MainMenuState extends MusicBeatState
 									case 'freeplay' | 'freeplay glitch':
 										if (FlxG.random.bool(0.05))
 										{
-											fancyOpenURL("https://www.youtube.com/watch?v=Z7wWa1G9_30%22");
+											FlxG.openURL("https://www.youtube.com/watch?v=Z7wWa1G9_30%22");
 										}
 										FlxG.switchState(new FreeplayState());
 									case 'options':

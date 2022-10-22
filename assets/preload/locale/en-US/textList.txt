@@ -53,6 +53,7 @@ pause_Restart Song==Restart Song
 pause_Change Character==Change Character
 pause_Exit to menu==Exit To Menu
 pause_No Miss Mode==No Miss Mode
+pause_Chart Editor==Chart Editor
 
 // Options State //
 option_change_keybinds==Change Keybinds

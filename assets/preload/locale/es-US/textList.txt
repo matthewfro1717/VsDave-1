@@ -51,6 +51,7 @@ pause_Restart Song==Reiniciar Canción
 pause_Change Character==Cambiar Personaje
 pause_Exit to menu==Salir al menú
 pause_No Miss Mode==Deshabilitar Fallos
+pause_Chart Editor==Editor de chart
 
 // Credits Words //
 supernovae_credit==¡La canción original fue creada por ArchWk!

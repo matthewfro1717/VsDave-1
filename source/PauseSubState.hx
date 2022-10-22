@@ -1,5 +1,6 @@
 package;
 
+import TerminalCheatingState.TerminalText;
 import flixel.group.FlxGroup;
 import haxe.Json;
 import haxe.Http;
@@ -15,7 +16,10 @@ import flixel.tweens.FlxEase;
 import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.addons.display.FlxBackdrop;
+import flixel.addons.transition.Transition;
+import flixel.addons.transition.FlxTransitionableState;
 import lime.app.Application;
+import flash.system.System;
 
 class PauseSubState extends MusicBeatSubstate
 {
@@ -42,7 +46,9 @@ class PauseSubState extends MusicBeatSubstate
 	{
 		super();
 
-		
+		if (['supernovae', 'cheating', 'unfairness', 'exploitation', 'master', 'recursed', 'glitch', 'kabunga', 'vs-dave-rap'].contains(PlayState.SONG.song.toLowerCase()))
+			menuItems.insert(4, new PauseOption('Chart Editor'));
+
 		funnyTexts = new FlxTypedGroup<FlxText>();
 		add(funnyTexts);
 
@@ -240,11 +246,108 @@ class PauseSubState extends MusicBeatSubstate
 					FlxG.switchState(new CharacterSelectState());	
 			case "No Miss Mode":
 				PlayState.instance.noMiss = !PlayState.instance.noMiss;
-				var nm = PlayState.SONG.song.toLowerCase();
-				if (['exploitation', 'cheating', 'unfairness', 'recursed', 'glitch', 'master', 'supernovae'].contains(nm))
+				if (['exploitation', 'cheating', 'unfairness', 'recursed', 'glitch', 'master', 'supernovae'].contains(PlayState.SONG.song.toLowerCase()))
 				{
 					PlayState.instance.health = 0;
 					close();
+				}
+			case "Chart Editor":
+				if(FlxTransitionableState.skipNextTransIn)
+					Transition.nextCamera = null;
+				
+				switch (PlayState.SONG.song.toLowerCase())
+				{
+					case 'supernovae':
+						FlxG.switchState(new TerminalCheatingState([
+							new TerminalText(0, [['Warning: ', 1], ['Chart Editor access detected', 1],]),
+							new TerminalText(200, [['run AntiCheat.dll', 0.5]]),
+							new TerminalText(0, [['ERROR: File currently being used by another process. Retrying in 3...', 3]]),
+							new TerminalText(200, [['File no longer in use, running AntiCheat.dll..', 2]]),
+						], function()
+						{
+							PlayState.instance.shakeCam = false;
+							#if SHADERS_ENABLED
+							PlayState.screenshader.Enabled = false;
+							#end
+	
+							PlayState.SONG = Song.loadFromJson("cheating"); // you dun fucked up
+							PlayState.isStoryMode = false;
+							PlayState.storyWeek = 14;
+							FlxG.save.data.cheatingFound = true;
+							FlxG.switchState(new PlayState());
+						}));
+						return;
+					case 'cheating':
+						FlxG.switchState(new TerminalCheatingState([
+							new TerminalText(0, [['Warning: ', 1], ['Chart Editor access detected', 1],]),
+							new TerminalText(200, [['run AntiCheat.dll', 3]]),
+						], function()
+						{
+							PlayState.isStoryMode = false;
+							PlayState.storyPlaylist = [];
+							
+							PlayState.instance.shakeCam = false;
+							#if SHADERS_ENABLED
+							PlayState.screenshader.Enabled = false;
+							#end
+	
+							PlayState.SONG = Song.loadFromJson("unfairness"); // you dun fucked up again
+							PlayState.storyWeek = 15;
+							FlxG.save.data.unfairnessFound = true;
+							FlxG.switchState(new PlayState());
+						}));
+						return;
+					case 'unfairness':
+						FlxG.switchState(new TerminalCheatingState([
+							new TerminalText(0, [
+								['bin/plugins/AntiCheat.dll: ', 1],
+								['No argument for function "AntiCheatThree"', 1],
+							]),
+							new TerminalText(100, [['Redirecting to terminal...', 1]])
+						], function()
+						{
+							PlayState.isStoryMode = false;
+							PlayState.storyPlaylist = [];
+							
+							PlayState.instance.shakeCam = false;
+							#if SHADERS_ENABLED
+							PlayState.screenshader.Enabled = false;
+							#end
+	
+							FlxG.switchState(new TerminalState());
+						}));
+						#if desktop
+						DiscordClient.changePresence("I have your IP address", null, null, true);
+						#end
+						return;
+					case 'exploitation' | 'master':
+						PlayState.instance.health = 0;
+					case 'recursed':
+						ChartingState.hahaFunnyRecursed();
+					case 'glitch':
+						PlayState.storyPlaylist = [];
+						
+						PlayState.SONG = Song.loadFromJson("kabunga"); // lol you loser
+						PlayState.isStoryMode = false;
+						FlxG.save.data.exbungoFound = true;
+						PlayState.instance.shakeCam = false;
+						#if SHADERS_ENABLED
+						PlayState.screenshader.Enabled = false;
+						#end
+						FlxG.switchState(new PlayState());
+						return;
+					case 'kabunga':
+						FlxG.openURL("https://benjaminpants.github.io/muko_firefox/index.html"); //banger game
+						System.exit(0);
+					case 'vs-dave-rap':
+						PlayState.SONG = Song.loadFromJson("vs-dave-rap-two");
+						FlxG.save.data.vsDaveRapTwoFound = true;
+						PlayState.instance.shakeCam = false;
+						#if SHADERS_ENABLED
+						PlayState.screenshader.Enabled = false;
+						#end
+						FlxG.switchState(new PlayState());
+						return;
 				}
 			case "Exit to menu":
 				if (MathGameState.failedGame)

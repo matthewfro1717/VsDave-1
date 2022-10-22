@@ -51,6 +51,7 @@ pause_Restart Song==Reiniciar Musica
 pause_Change Character==Trocar de Personagem
 pause_Exit to menu==Sair para o Menu
 pause_No Miss Mode==Invencibilidade
+pause_Chart Editor==Editor de chart
 
 // Credits State //
 credits_dev==Desenvolvedores

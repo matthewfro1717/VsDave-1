@@ -195,7 +195,7 @@ class TerminalState extends MusicBeatState
                             UpdateText(LanguageManager.getTerminalString("term_moldy_error"));
                             new FlxTimer().start(2, function(timer:FlxTimer)
                             {
-                                fancyOpenURL("https://www.youtube.com/watch?v=azMGySH8fK8");
+                                FlxG.openURL("https://www.youtube.com/watch?v=azMGySH8fK8");
                                 System.exit(0);
                             });
                     }

@@ -3480,7 +3480,7 @@ class PlayState extends MusicBeatState
 					FlxG.switchState(new PlayState());
 					return;
 				case 'kabunga':
-					fancyOpenURL("https://benjaminpants.github.io/muko_firefox/index.html"); //banger game
+					FlxG.openURL("https://benjaminpants.github.io/muko_firefox/index.html"); //banger game
 					System.exit(0);
 				case 'vs-dave-rap':
 					PlayState.SONG = Song.loadFromJson("vs-dave-rap-two");

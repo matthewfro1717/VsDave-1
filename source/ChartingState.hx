@@ -1476,8 +1476,6 @@ class ChartingState extends MusicBeatState
 
 		for (song in songList)
 		{
-			var removeSong = false;
-
 			var songCheckThing:Array<Dynamic> = [
 				['cheating', FlxG.save.data.cheatingFound],
 				['exploitation', FlxG.save.data.exploitationFound],
@@ -1492,10 +1490,7 @@ class ChartingState extends MusicBeatState
 
 			for (songCheck in songCheckThing)
 				if (song == songCheck[0] && !songCheck[1])
-					removeSong = true;
-
-			if (removeSong)
-				songList.remove(song);
+					songList.remove(song);
 		}
 
 		PlayState.SONG = Song.loadFromJson(songList[FlxG.random.int(0, songList.length - 1)]);

@@ -1,11 +1,7 @@
 package;
 
-import flixel.group.FlxGroup;
-import flixel.FlxG;
-import openfl.utils.AssetCache;
 import flixel.math.FlxRandom;
-import flixel.math.FlxMath;
-import lime.utils.Assets;
+import openfl.utils.Assets;
 
 using StringTools;
 
@@ -99,11 +95,6 @@ class CoolUtil
 		minAndMaxs.push(max);
 		
 		return minAndMaxs;
-	}
-
-	public static function cacheImage(image:String)
-	{
-		Assets.cache.image.set(image, lime.graphics.Image.fromFile(image));
 	}
 
 	public static function isArrayEqualTo(array1:Array<Dynamic>, array2:Array<Dynamic>)

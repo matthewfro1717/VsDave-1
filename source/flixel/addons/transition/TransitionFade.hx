@@ -43,9 +43,7 @@ class TransitionFade extends TransitionEffect
 		back.scrollFactor.set(1, 1);
 		#if SHADERS_ENABLED
 		if(CompatTool.save.data.compatMode != null && CompatTool.save.data.compatMode == false)
-		{
-			back.shader = dShader.shader;
-		}
+			back.shader = new DitherEffect().shader;
 		#end
 		add(back);
 	}

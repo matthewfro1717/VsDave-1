@@ -302,10 +302,13 @@ class MobileControlsSubState extends FlxSubState
 
 		if (curSelected < 0)
 			curSelected = controlsItems.length - 1;
+
 		if (curSelected >= controlsItems.length)
 			curSelected = 0;
 
-		reloadMobileControls(controlsItems[Math.floor(curSelected)]);
+		var daChoice:String = controlsItems[Math.floor(curSelected)];
+
+		reloadMobileControls(daChoice);
 
 		funitext.visible = daChoice == 'Keyboard';
 		resetButton.visible = (daChoice == 'Pad-Custom' || daChoice == 'Space-Button');

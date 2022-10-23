@@ -94,7 +94,7 @@ class FlxSplash extends FlxState
 				justTouched = true;
 		#end
 
-		if (FlxG.save.data.hasSeenSplash && FlxG.keys.justPressed.ENTER #if mobile || justTouched #end)
+		if (FlxG.save.data.hasSeenSplash && (FlxG.keys.justPressed.ENTER #if mobile || justTouched #end))
 		{
 			onComplete(null);
 		}

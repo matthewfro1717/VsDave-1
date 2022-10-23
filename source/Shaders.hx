@@ -493,22 +493,19 @@ class DitherShader extends FlxShader
 
         void main(void)
         {
-            vec4 lum = vec4(0.299, 0.587, 0.114, 0);
-            float grayscale = dot(texture2D(bitmap, openfl_TextureCoordv), lum);
-            vec4 rgba = texture2D(bitmap, openfl_TextureCoordv).rgba;
-
             vec2 xy = gl_FragCoord.xy * Scale;
+        
             int x = int(mod(xy.x, 8.0));
             int y = int(mod(xy.y, 8.0));
-
-            vec4 finalRGB = rgba;
-            finalRGB.r = find_closest(x, y, rgba.r);
-            finalRGB.g = find_closest(x, y, rgba.g);
-            finalRGB.b = find_closest(x, y, rgba.b);
-            finalRGB.a = find_closest(x, y, rgba.a);
-
-            float final = find_closest(x, y, grayscale);
-            gl_FragColor = finalRGB;
+        
+            vec4 rgba = texture2D(bitmap, openfl_TextureCoordv).rgba;
+        
+            gl_FragColor = vec4(
+                find_closest(x, y, rgba.r),
+                find_closest(x, y, rgba.g),
+                find_closest(x, y, rgba.b),
+                find_closest(x, y, rgba.a)
+            );
         }
     ')
     #end

@@ -328,6 +328,11 @@ class TerminalState extends MusicBeatState
         }));
         CommandList.push(new TerminalCommand("secret mod leak", LanguageManager.getTerminalString("term_leak_ins"), function(arguments:Array<String>)
         {
+            #if android
+			FlxG.stage.window.textInputEnabled = false;
+			if (FlxG.stage.window.onTextInput.has(writeText))
+				FlxG.stage.window.onTextInput.remove(writeText);
+			#end
 			MathGameState.accessThroughTerminal = true;
             FlxG.switchState(new MathGameState());
         }, false, true));
@@ -371,6 +376,53 @@ class TerminalState extends MusicBeatState
         displayText.text = finalthing;
     }
 
+    #if android
+    function writeText(letter:String)
+    {
+        if (letter == 'Enter')
+        {
+            var calledFunc:Bool = false;
+            var arguments:Array<String> = curCommand.split(" ");
+            for (v in CommandList)
+            {
+                if (v.commandName == arguments[0] || (v.commandName == curCommand && v.oneCommand)) //argument 0 should be the actual command at the moment
+                {
+                    arguments.shift();
+                    calledFunc = true;
+                    v.FuncToCall(arguments);
+                    break;
+                }
+            }
+
+            if (!calledFunc)
+            {
+                UpdatePreviousText(false); //resets the text
+                UpdateText(LanguageManager.getTerminalString("term_unknown") + arguments[0] + "\"");
+            }
+
+            UpdatePreviousText(true);
+            return;
+        }
+        else if (letter == 'Backspace')
+        {
+            curCommand = curCommand.substr(0,curCommand.length - 1);
+            typeSound.play();
+        }
+        // else if (letter == FlxKey.SPACE)
+        // {
+            // curCommand += " ";
+            // typeSound.play();
+        // }
+        else
+        {
+            curCommand += letter;
+            typeSound.play();
+        }
+
+        UpdateText(curCommand);
+    }
+    #end
+
     override function update(elapsed:Float):Void
     {
         super.update(elapsed);
@@ -387,34 +439,45 @@ class TerminalState extends MusicBeatState
             }
             return;
         }
-        var keyJustPressed:FlxKey = cast(FlxG.keys.firstJustPressed(), FlxKey);
 
-        if (keyJustPressed == FlxKey.ENTER)
+        #if android
+        for (touch in FlxG.touch.list)
         {
-            var calledFunc:Bool = false;
-            var arguments:Array<String> = curCommand.split(" ");
-            for (v in CommandList)
+            if (touch.overlaps(displayText) && (touch.justPressed || youch.justReleased))
             {
-                if (v.commandName == arguments[0] || (v.commandName == curCommand && v.oneCommand)) //argument 0 should be the actual command at the moment
-                {
-                    arguments.shift();
-                    calledFunc = true;
-                    v.FuncToCall(arguments);
-                    break;
-                }
+                FlxG.stage.window.textInputEnabled = true;
+                FlxG.stage.window.onTextInput.add(writeText);
             }
-            if (!calledFunc)
-            {
-                UpdatePreviousText(false); //resets the text
-                UpdateText(LanguageManager.getTerminalString("term_unknown") + arguments[0] + "\"");
-            }
-            UpdatePreviousText(true);
-            return;
         }
-
+        #else
+        var keyJustPressed:FlxKey = cast(FlxG.keys.firstJustPressed(), FlxKey);
         if (keyJustPressed != FlxKey.NONE)
         {
-            if (keyJustPressed == FlxKey.BACKSPACE)
+            if (keyJustPressed == FlxKey.ENTER)
+            {
+                var calledFunc:Bool = false;
+                var arguments:Array<String> = curCommand.split(" ");
+                for (v in CommandList)
+                {
+                    if (v.commandName == arguments[0] || (v.commandName == curCommand && v.oneCommand)) //argument 0 should be the actual command at the moment
+                    {
+                        arguments.shift();
+                        calledFunc = true;
+                        v.FuncToCall(arguments);
+                        break;
+                    }
+                }
+    
+                if (!calledFunc)
+                {
+                    UpdatePreviousText(false); //resets the text
+                    UpdateText(LanguageManager.getTerminalString("term_unknown") + arguments[0] + "\"");
+                }
+    
+                UpdatePreviousText(true);
+                return;
+            }
+            else if (keyJustPressed == FlxKey.BACKSPACE)
             {
                 curCommand = curCommand.substr(0,curCommand.length - 1);
                 typeSound.play();
@@ -444,11 +507,14 @@ class TerminalState extends MusicBeatState
             }
             UpdateText(curCommand);
         }
+
         if (FlxG.keys.pressed.CONTROL && FlxG.keys.justPressed.BACKSPACE)
         {
             curCommand = "";
         }
-        if (FlxG.keys.justPressed.ESCAPE)
+        #end
+
+        if (FlxG.keys.justPressed.ESCAPE #if android || (FlxG.android.justReleased.BACK && !FlxG.stage.window.textInputEnabled) #end)
         {
             Main.fps.visible = !FlxG.save.data.disableFps;
             FlxG.switchState(new MainMenuState());
@@ -555,6 +621,16 @@ class TerminalState extends MusicBeatState
 				});
 			});
         });
+    }
+
+    override function destroy():Void
+    {
+        #if android
+        FlxG.stage.window.textInputEnabled = false;
+        if (FlxG.stage.window.onTextInput.has(writeText))
+            FlxG.stage.window.onTextInput.remove(writeText);
+        #end
+        super.destroy();
     }
 }
 

@@ -6390,6 +6390,9 @@ class PlayState extends MusicBeatState
 							FlxTween.tween(Application.current.window, {x: windowProperties[0], y: windowProperties[1], width: windowProperties[2], height: windowProperties[3]}, 1, {ease: FlxEase.circInOut});
 							FlxTween.tween(iconP2, {alpha: 0}, 1, {ease: FlxEase.bounceOut});
 						}
+						#else
+						FlxTween.tween(dad, {alpha: 0}, 1, {ease: FlxEase.bounceOut});
+						FlxTween.tween(iconP2, {alpha: 0}, 1, {ease: FlxEase.bounceOut});
 						#end
 					case 2083:
 						#if android

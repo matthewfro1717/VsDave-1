@@ -470,22 +470,110 @@ class DitherShader extends FlxShader
 
         float find_closest(int x, int y, float c0)
         {
-            int dither[8][8] = {
-                {0, 32, 8, 40, 2, 34, 10, 42}, /* 8x8 Bayer ordered dithering */
-                {48, 16, 56, 24, 50, 18, 58, 26}, /* pattern. Each input pixel */
-                {12, 44, 4, 36, 14, 46, 6, 38}, /* is scaled to the 0..63 range */
-                {60, 28, 52, 20, 62, 30, 54, 22}, /* before looking in this table */
-                {3, 35, 11, 43, 1, 33, 9, 41}, /* to determine the action. */
-                {51, 19, 59, 27, 49, 17, 57, 25},
-                {15, 47, 7, 39, 13, 45, 5, 37},
-                {63, 31, 55, 23, 61, 29, 53, 21}
-            };
-
+            int dither[8];
+        
+            if (x == 0)
+            {
+                dither[0] = 0;
+                dither[1] = 32; 
+                dither[2] = 8;
+                dither[3] = 40;
+                dither[4] = 2;
+                dither[5] = 34;
+                dither[6] = 10;
+                dither[7] = 42;
+            }
+        
+            if (x == 1)
+            {
+                dither[0] = 48;
+                dither[1] = 16;
+                dither[2] = 56;
+                dither[3] = 24;
+                dither[4] = 50;
+                dither[5] = 18;
+                dither[6] = 58;
+                dither[7] = 26;
+            }
+        
+            if (x == 2)
+            {
+                dither[0] = 12;
+                dither[1] = 44;
+                dither[2] = 4;
+                dither[3] = 36;
+                dither[4] = 14;
+                dither[5] = 46;
+                dither[6] = 6;
+                dither[7] = 38;
+            }
+        
+            if (x == 3)
+            {
+                dither[0] = 60;
+                dither[1] = 28;
+                dither[2] = 52;
+                dither[3] = 20;
+                dither[4] = 62;
+                dither[5] = 30;
+                dither[6] = 54;
+                dither[7] = 22;
+            }
+        
+            if (x == 4)
+            {
+                dither[0] = 3;
+                dither[1] = 35;
+                dither[2] = 11;
+                dither[3] = 43;
+                dither[4] = 1;
+                dither[5] = 33;
+                dither[6] = 9;
+                dither[7] = 41;
+            }
+        
+            if (x == 5)
+            {
+                dither[0] = 51;
+                dither[1] = 19;
+                dither[2] = 59;
+                dither[3] = 27;
+                dither[4] = 49;
+                dither[5] = 17;
+                dither[6] = 57;
+                dither[7] = 25;
+            }
+        
+            if (x == 6)
+            {
+                dither[0] = 15;
+                dither[1] = 47;
+                dither[2] = 7;
+                dither[3] = 39;
+                dither[4] = 13;
+                dither[5] = 45;
+                dither[6] = 5;
+                dither[7] = 37;
+            }
+        
+            if (x == 7)
+            {
+                dither[0] = 63;
+                dither[1] = 31;
+                dither[2] = 55;
+                dither[3] = 23;
+                dither[4] = 61;
+                dither[5] = 29;
+                dither[6] = 53;
+                dither[7] = 21;
+            }
+        
             float limit = 0.0;
-            if(x < 8)
-                limit = (dither[x][y]+1)/64.0;
 
-            if(c0 < limit)
+            if (x < 8)
+                limit = (dither[y] + 1) / 64.0;
+
+            if (c0 < limit)
                 return 0.0;
 
             return 1.0;
@@ -493,19 +581,12 @@ class DitherShader extends FlxShader
 
         void main(void)
         {
-            vec2 xy = gl_FragCoord.xy * Scale;
-        
-            int x = int(mod(xy.x, 8.0));
-            int y = int(mod(xy.y, 8.0));
-        
             vec4 rgba = texture2D(bitmap, openfl_TextureCoordv).rgba;
         
-            gl_FragColor = vec4(
-                find_closest(x, y, rgba.r),
-                find_closest(x, y, rgba.g),
-                find_closest(x, y, rgba.b),
-                find_closest(x, y, rgba.a)
-            );
+            int x = int(mod(vec2(gl_FragCoord.xy * Scale).x, 8.0));
+            int y = int(mod(vec2(gl_FragCoord.xy * Scale).y, 8.0));
+        
+            gl_FragColor = vec4(find_closest(x, y, rgba.r), find_closest(x, y, rgba.g), find_closest(x, y, rgba.b), find_closest(x, y, rgba.a));
         }
     ')
     #end

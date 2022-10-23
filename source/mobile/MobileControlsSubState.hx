@@ -105,9 +105,15 @@ class MobileControlsSubState extends FlxSubState
 		resetButton = new FlxButton(exitButton.x, exitButton.y + 100, 'Reset', function()
 		{
 			if (controlsItems[Math.floor(curSelected)] == 'Pad-Custom' && resetButton.visible)
+			{
 				MobileControls.customVirtualPad = new FlxVirtualPad(RIGHT_FULL, NONE);
+				reloadMobileControls('Pad-Custom');
+			}
 			else if (controlsItems[Math.floor(curSelected)] == 'Space-Button' && resetButton.visible)
+			{
 				MobileControls.spaceButtonPositions = new FlxPoint(FlxG.width - 132, FlxG.height - 135);
+				reloadMobileControls('Space-Button');
+			}
 		});
 		resetButton.setGraphicSize(Std.int(resetButton.width) * 3);
 		resetButton.label.setFormat(Assets.getFont('assets/mobile/menu/Comic Sans MS.ttf').fontName, 16, FlxColor.WHITE, CENTER, true);
@@ -299,8 +305,28 @@ class MobileControlsSubState extends FlxSubState
 		if (curSelected >= controlsItems.length)
 			curSelected = 0;
 
-		var daChoice:String = controlsItems[Math.floor(curSelected)];
+		reloadMobileControls(controlsItems[Math.floor(curSelected)]);
 
+		funitext.visible = daChoice == 'Keyboard';
+		resetButton.visible = (daChoice == 'Pad-Custom' || daChoice == 'Space-Button');
+		upPozition.visible = daChoice == 'Pad-Custom';
+		downPozition.visible = daChoice == 'Pad-Custom';
+		leftPozition.visible = daChoice == 'Pad-Custom';
+		rightPozition.visible = daChoice == 'Pad-Custom';
+		spacePozition.visible = daChoice == 'Space-Button';
+		savePositionsButton.visible = daChoice == 'Space-Button';
+	}
+
+	function moveButton(touch:FlxTouch, button:FlxButton):Void
+	{
+		bindButton = button;
+		bindButton.x = touch.x - Std.int(bindButton.width / 2);
+		bindButton.y = touch.y - Std.int(bindButton.height / 2);
+		buttonBinded = true;
+	}
+
+	function reloadMobileControls(daChoice:String):Void
+	{
 		switch (daChoice)
 		{
 			case 'Pad-Right':
@@ -335,22 +361,5 @@ class MobileControlsSubState extends FlxSubState
 				virtualPad = new FlxVirtualPad(NONE, SPACE);
 				add(virtualPad);
 		}
-
-		funitext.visible = daChoice == 'Keyboard';
-		resetButton.visible = (daChoice == 'Pad-Custom' || daChoice == 'Space-Button');
-		upPozition.visible = daChoice == 'Pad-Custom';
-		downPozition.visible = daChoice == 'Pad-Custom';
-		leftPozition.visible = daChoice == 'Pad-Custom';
-		rightPozition.visible = daChoice == 'Pad-Custom';
-		spacePozition.visible = daChoice == 'Space-Button';
-		savePositionsButton.visible = daChoice == 'Space-Button';
-	}
-
-	function moveButton(touch:FlxTouch, button:FlxButton):Void
-	{
-		bindButton = button;
-		bindButton.x = touch.x - Std.int(bindButton.width / 2);
-		bindButton.y = touch.y - Std.int(bindButton.height / 2);
-		buttonBinded = true;
 	}
 }

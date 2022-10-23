@@ -1469,7 +1469,7 @@ class ChartingState extends MusicBeatState
 		for (song in Assets.list(SOUND).filter(song -> song.contains('assets/songs')))
 		{
 			// simulating da FileSystem.readDirectory?
-			song.replace('assets/songs/', '').replace('/Inst.${Paths.SOUND_EXT}', '').replace('/Voices.${Paths.SOUND_EXT}', '');
+			song.replace('assets/songs/', '-').replace('/Inst.${Paths.SOUND_EXT}', '-').replace('/Voices.${Paths.SOUND_EXT}', '-');
 			if (!songList.contains(song) && !song.contains('extern'))
 				songList.push(song);
 		}

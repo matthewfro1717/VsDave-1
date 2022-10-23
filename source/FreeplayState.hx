@@ -621,6 +621,10 @@ class FreeplayState extends MusicBeatState
 						iconArray = [];
 						curSelected = 0;
 						canInteract = true;
+						#if mobile
+						removeVirtualPad();
+						addVirtualPad(LEFT_RIGHT, A_B);
+						#end
 					}});
 				}
 			}

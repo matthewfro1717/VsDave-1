@@ -4,6 +4,7 @@ import flixel.FlxG;
 import flixel.graphics.FlxGraphic;
 import flixel.graphics.frames.FlxAtlasFrames;
 import openfl.media.Sound;
+import openfl.system.System;
 import openfl.utils.AssetType;
 import openfl.utils.Assets;
 
@@ -50,6 +51,9 @@ class Paths
 				}
 			}
 		}
+
+		// run the garbage collector for good measure lmfao
+		System.gc();
 	}
 
 	public static function clearStoredMemory():Void

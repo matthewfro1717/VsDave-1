@@ -441,9 +441,9 @@ class TerminalState extends MusicBeatState
         }
 
         #if android
-        for (touch in FlxG.touch.list)
+        for (touch in FlxG.touches.list)
         {
-            if (touch.overlaps(displayText) && (touch.justPressed || youch.justReleased))
+            if (touch.overlaps(displayText) && (touch.justPressed || touch.justReleased))
             {
                 FlxG.stage.window.textInputEnabled = true;
                 FlxG.stage.window.onTextInput.add(writeText);

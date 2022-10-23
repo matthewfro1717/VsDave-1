@@ -9,7 +9,7 @@ import flixel.graphics.frames.FlxFrame;
 import flixel.graphics.FlxGraphic;
 import flixel.addons.transition.Transition;
 import flixel.group.FlxGroup;
-#if desktop
+#if (desktop || android)
 import sys.FileSystem;
 #end
 import flixel.util.FlxArrayUtil;
@@ -6391,7 +6391,7 @@ class PlayState extends MusicBeatState
 							FlxTween.tween(iconP2, {alpha: 0}, 1, {ease: FlxEase.bounceOut});
 						}
 						#else
-						FlxTween.tween(dad, {alpha: 0}, 1, {ease: FlxEase.bounceOut});
+						dad.visible = false;
 						FlxTween.tween(iconP2, {alpha: 0}, 1, {ease: FlxEase.bounceOut});
 						#end
 					case 2083:

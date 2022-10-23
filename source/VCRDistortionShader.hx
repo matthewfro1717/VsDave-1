@@ -35,7 +35,6 @@ class VCRDistortionShader extends FlxShader // https://www.shadertoy.com/view/ld
     	float inside = step(start,y) - step(end,y);
     	float fact = (y-start)/(end-start)*inside;
     	return (1.-fact) * inside;
-
     }
 
     vec4 getVideo(vec2 uv)

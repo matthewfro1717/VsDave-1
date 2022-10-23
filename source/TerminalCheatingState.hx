@@ -43,11 +43,10 @@ class TerminalCheatingState extends FlxUIState
          FlxG.sound.music.stop();
       });
 
-      if(CompatTool.save.data.compatMode != null && CompatTool.save.data.compatMode == false)
-      {
-         var vcr:VCRDistortionShader = new VCRDistortionShader();
-         FlxG.camera.setFilters([new ShaderFilter(vcr)]);
-      }
+      #if SHADERS_ENABLED
+      var vcr:VCRDistortionShader = new VCRDistortionShader();
+      FlxG.camera.setFilters([new ShaderFilter(vcr)]);
+      #end
 
       var bg:FlxSprite = new FlxSprite().loadGraphic(Paths.image('backgrounds/terminal'));
       bg.setGraphicSize(FlxG.width, FlxG.height);

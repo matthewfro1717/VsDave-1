@@ -27,7 +27,6 @@ private class GraphicDiagonalGradient extends BitmapData {}
 class TransitionFade extends TransitionEffect
 {
 	var back:FlxSprite;
-	var dShader = new DitherEffect();
 	var tweenStr:String = "";
 	var tweenStr2:String = "";
 	var tweenValStart:Float = 0;

@@ -220,9 +220,9 @@ class MobileControlsSubState extends FlxSubState
 
 		for (touch in FlxG.touches.list)
 		{
-			if (touch.overlaps(leftArrow) && (touch.justPressed || touch.justReleased))
+			if (touch.overlaps(leftArrow) && touch.justPressed)
 				changeSelection(-1);
-			else if (touch.overlaps(rightArrow) && (touch.justPressed || touch.justReleased))
+			else if (touch.overlaps(rightArrow) && touch.justPressed)
 				changeSelection(1);
 
 			if (controlsItems[Math.floor(curSelected)] == 'Pad-Custom')

@@ -29,22 +29,13 @@ class TerminalState extends MusicBeatState
 	public var previousText:String = LanguageManager.getTerminalString("term_introduction");
 	public var displayText:FlxText;
 
-	var expungedActivated:Bool = false;
-
-	public var CommandList:Array<TerminalCommand> = new Array<TerminalCommand>();
+	public var commandList:Array<TerminalCommand> = new Array<TerminalCommand>();
 	public var typeSound:FlxSound;
-
-	public static inline var NO_FILTER:Int = 0;
-
-	public static inline var ALL_CASES:Int = 0;
-	public static inline var UPPER_CASE:Int = 1;
-	public static inline var LOWER_CASE:Int = 2;
-
-	public var filterMode(default, set):Int = NO_FILTER;
 
 	public var fakeDisplayGroup:FlxTypedGroup<FlxText> = new FlxTypedGroup<FlxText>();
 	public var expungedTimer:FlxTimer;
 
+	var expungedActivated:Bool = false;
 	var curExpungedAlpha:Float = 0;
 
 	override public function create():Void
@@ -54,33 +45,31 @@ class TerminalState extends MusicBeatState
 
 		Main.fps.visible = false;
 		PlayState.isStoryMode = false;
+	
 		displayText = new FlxText(0, 0, FlxG.width, previousText, 32);
 		displayText.setFormat(Paths.font("fixedsys.ttf"), 16);
 		displayText.size *= 2;
 		displayText.antialiasing = false;
 		typeSound = FlxG.sound.load(Paths.sound('terminal_space'), 0.6);
+
 		FlxG.sound.playMusic(Paths.music('TheAmbience', 'shared'), 0.7);
 
-		CommandList.push(new TerminalCommand("help", LanguageManager.getTerminalString("term_help_ins"), function(arguments:Array<String>)
+		commandList.push(new TerminalCommand("help", LanguageManager.getTerminalString("term_help_ins"), function(arguments:Array<String>)
 		{
 			UpdatePreviousText(false); // resets the text
 			var helpText:String = "";
-			for (v in CommandList)
-			{
+			for (v in commandList)
 				if (v.showInHelp)
-				{
 					helpText += (v.commandName + " - " + v.commandHelp + "\n");
-				}
-			}
 			UpdateText("\n" + helpText);
 		}));
 
-		CommandList.push(new TerminalCommand("characters", LanguageManager.getTerminalString("term_char_ins"), function(arguments:Array<String>)
+		commandList.push(new TerminalCommand("characters", LanguageManager.getTerminalString("term_char_ins"), function(arguments:Array<String>)
 		{
 			UpdatePreviousText(false); // resets the text
 			UpdateText("\ndave.dat\nbambi.dat\ntristan.dat\nexpunged.dat\nexbungo.dat\nrecurser.dat\nmoldy.dat");
 		}));
-		CommandList.push(new TerminalCommand("admin", LanguageManager.getTerminalString("term_admin_ins"), function(arguments:Array<String>)
+		commandList.push(new TerminalCommand("admin", LanguageManager.getTerminalString("term_admin_ins"), function(arguments:Array<String>)
 		{
 			if (arguments.length == 0)
 			{
@@ -172,12 +161,12 @@ class TerminalState extends MusicBeatState
 				}
 			}
 		}));
-		CommandList.push(new TerminalCommand("clear", LanguageManager.getTerminalString("term_clear_ins"), function(arguments:Array<String>)
+		commandList.push(new TerminalCommand("clear", LanguageManager.getTerminalString("term_clear_ins"), function(arguments:Array<String>)
 		{
 			previousText = "> ";
 			UpdateText("");
 		}));
-		CommandList.push(new TerminalCommand("open", LanguageManager.getTerminalString("term_texts_ins"), function(arguments:Array<String>)
+		commandList.push(new TerminalCommand("open", LanguageManager.getTerminalString("term_texts_ins"), function(arguments:Array<String>)
 		{
 			UpdatePreviousText(false); // resets the text
 			var tx = "";
@@ -276,7 +265,7 @@ class TerminalState extends MusicBeatState
 			}
 			UpdateText("\n" + tx);
 		}));
-		CommandList.push(new TerminalCommand("vault", LanguageManager.getTerminalString("term_vault_ins"), function(arguments:Array<String>)
+		commandList.push(new TerminalCommand("vault", LanguageManager.getTerminalString("term_vault_ins"), function(arguments:Array<String>)
 		{
 			UpdatePreviousText(false); // resets the text
 			var funnyRequiredKeys:Array<String> = ['free', 'reflection', 'p.r.a.e.m'];
@@ -294,7 +283,7 @@ class TerminalState extends MusicBeatState
 				UpdateText("\n" + "Invalid keys. Valid keys: " + amountofkeys);
 			}
 		}));
-		CommandList.push(new TerminalCommand("secret mod leak", LanguageManager.getTerminalString("term_leak_ins"), function(arguments:Array<String>)
+		commandList.push(new TerminalCommand("secret mod leak", LanguageManager.getTerminalString("term_leak_ins"), function(arguments:Array<String>)
 		{
 			MathGameState.accessThroughTerminal = true;
 			FlxG.switchState(new MathGameState());
@@ -343,13 +332,11 @@ class TerminalState extends MusicBeatState
 
 	private function onKeyDown(e:KeyboardEvent):Void
 	{
-		var key:Int = e.keyCode;
-
-		if (key == 13) // Enter
+		if (e.keyCode == 13) // Enter
 		{
 			var calledFunc:Bool = false;
 			var arguments:Array<String> = curCommand.split(" ");
-			for (v in CommandList)
+			for (v in commandList)
 			{
 				if (v.commandName == arguments[0]
 					|| (v.commandName == curCommand && v.oneCommand)) // argument 0 should be the actual command at the moment
@@ -370,12 +357,12 @@ class TerminalState extends MusicBeatState
 			UpdatePreviousText(true);
 			return;
 		}
-		else if (key == 8) // BackSpace
+		else if (e.keyCode == 8) // BackSpace
 		{
 			curCommand = curCommand.substr(0, curCommand.length - 1);
 			typeSound.play();
 		}
-		else if (key == 32) // Space
+		else if (e.keyCode == 32) // Space
 		{
 			curCommand += " ";
 			typeSound.play();
@@ -385,7 +372,7 @@ class TerminalState extends MusicBeatState
 			if (e.charCode == 0) // Non-printable characters crash String.fromCharCode
 				return;
 
-			var newText:String = filter(String.fromCharCode(e.charCode));
+			var newText:String = String.fromCharCode(e.charCode);
 			if (newText.length > 0)
 			{
 				curCommand += newText;
@@ -394,45 +381,6 @@ class TerminalState extends MusicBeatState
 		}
 
 		UpdateText(curCommand);
-	}
-
-	private function filter(text:String):String
-	{
-		if (forceCase == UPPER_CASE)
-		{
-			text = text.toUpperCase();
-		}
-		else if (forceCase == LOWER_CASE)
-		{
-			text = text.toLowerCase();
-		}
-
-		if (filterMode != NO_FILTER)
-		{
-			var pattern:EReg;
-			switch (filterMode)
-			{
-				case ONLY_ALPHA:
-					pattern = ~/[^a-zA-Z]*/g;
-				case ONLY_NUMERIC:
-					pattern = ~/[^0-9]*/g;
-				case ONLY_ALPHANUMERIC:
-					pattern = ~/[^a-zA-Z0-9]*/g;
-				case CUSTOM_FILTER:
-					pattern = customFilterPattern;
-				default:
-					throw new Error("FlxInputText: Unknown filterMode (" + filterMode + ")");
-			}
-			text = pattern.replace(text, "");
-		}
-		return text;
-	}
-
-	private function set_forceCase(Value:Int):Int
-	{
-		forceCase = Value;
-		text = filter(text);
-		return forceCase;
 	}
 
 	override function update(elapsed:Float):Void

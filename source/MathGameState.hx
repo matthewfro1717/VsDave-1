@@ -228,9 +228,9 @@ class MathGameState extends MusicBeatState
                   FlxG.save.data.roofsUnlocked = true;
                   FlxG.save.flush();
 
-                  FlxG.switchState(new PlayState());
+                  LoadingState.loadAndSwitchState(new PlayState());
                case 'failed':
-                  accessThroughTerminal ? FlxG.switchState(new MainMenuState()) : FlxG.switchState(new PlayState());      
+                  accessThroughTerminal ? FlxG.switchState(new MainMenuState()) : LoadingState.loadAndSwitchState(new PlayState());;      
             }
          }
       }

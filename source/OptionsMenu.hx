@@ -137,7 +137,6 @@ class OptionsMenu extends MusicBeatState
 		if (controls.BACK)
 		{
 			FlxG.save.flush();
-			CompatTool.save.flush();
 			FlxG.switchState(new MainMenuState());
 		}
 		if (controls.UP_P)

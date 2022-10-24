@@ -415,7 +415,7 @@ class TerminalState extends MusicBeatState
         // }
         else
         {
-            curCommand += letter;
+            curCommand = letter;
             typeSound.play();
         }
 

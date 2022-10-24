@@ -3418,6 +3418,7 @@ class PlayState extends MusicBeatState
 						isStoryMode = false;
 						PlayState.storyWeek = 14;
 						FlxG.save.data.cheatingFound = true;
+						FlxG.save.flush();
 						FlxG.switchState(new PlayState());
 					}));
 					return;
@@ -3438,6 +3439,7 @@ class PlayState extends MusicBeatState
 						PlayState.SONG = Song.loadFromJson("unfairness"); // you dun fucked up again
 						PlayState.storyWeek = 15;
 						FlxG.save.data.unfairnessFound = true;
+						FlxG.save.flush();
 						FlxG.switchState(new PlayState());
 					}));
 					return;
@@ -3475,6 +3477,7 @@ class PlayState extends MusicBeatState
 					PlayState.SONG = Song.loadFromJson("kabunga"); // lol you loser
 					isStoryMode = false;
 					FlxG.save.data.exbungoFound = true;
+					FlxG.save.flush();
 					shakeCam = false;
 					#if SHADERS_ENABLED
 					screenshader.Enabled = false;
@@ -3487,6 +3490,7 @@ class PlayState extends MusicBeatState
 				case 'vs-dave-rap':
 					PlayState.SONG = Song.loadFromJson("vs-dave-rap-two");
 					FlxG.save.data.vsDaveRapTwoFound = true;
+					FlxG.save.flush();
 					shakeCam = false;
 					#if SHADERS_ENABLED
 					screenshader.Enabled = false;

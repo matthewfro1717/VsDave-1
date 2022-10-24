@@ -230,7 +230,7 @@ class MathGameState extends MusicBeatState
 
                   LoadingState.loadAndSwitchState(new PlayState());
                case 'failed':
-                  accessThroughTerminal ? FlxG.switchState(new MainMenuState()) : LoadingState.loadAndSwitchState(new PlayState());;      
+                  accessThroughTerminal ? FlxG.switchState(new MainMenuState()) : LoadingState.loadAndSwitchState(new PlayState());      
             }
          }
       }

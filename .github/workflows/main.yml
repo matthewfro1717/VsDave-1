@@ -23,7 +23,7 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@main
         with:
-          distribution: 'adopt-hotspot'
+          distribution: 'zulu'
           java-version: '11'
 
       - name: Setup Android SDK
@@ -84,7 +84,7 @@ jobs:
       - name: Setup Java JDK
         uses: actions/setup-java@main
         with:
-          distribution: 'adopt-hotspot'
+          distribution: 'zulu'
           java-version: '11'
 
       - name: Setup Android SDK

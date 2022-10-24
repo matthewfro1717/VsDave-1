@@ -34,6 +34,8 @@ class TerminalState extends MusicBeatState
 	public var CommandList:Array<TerminalCommand> = new Array<TerminalCommand>();
 	public var typeSound:FlxSound;
 
+	public static inline var NO_FILTER:Int = 0;
+
 	public static inline var ALL_CASES:Int = 0;
 	public static inline var UPPER_CASE:Int = 1;
 	public static inline var LOWER_CASE:Int = 2;

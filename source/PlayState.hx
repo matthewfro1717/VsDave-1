@@ -3419,7 +3419,7 @@ class PlayState extends MusicBeatState
 						PlayState.storyWeek = 14;
 						FlxG.save.data.cheatingFound = true;
 						FlxG.save.flush();
-						FlxG.switchState(new PlayState());
+						LoadingState.loadAndSwitchState(new PlayState());
 					}));
 					return;
 				case 'cheating':
@@ -3440,7 +3440,7 @@ class PlayState extends MusicBeatState
 						PlayState.storyWeek = 15;
 						FlxG.save.data.unfairnessFound = true;
 						FlxG.save.flush();
-						FlxG.switchState(new PlayState());
+						LoadingState.loadAndSwitchState(new PlayState());
 					}));
 					return;
 				case 'unfairness':
@@ -3482,7 +3482,7 @@ class PlayState extends MusicBeatState
 					#if SHADERS_ENABLED
 					screenshader.Enabled = false;
 					#end
-					FlxG.switchState(new PlayState());
+					LoadingState.loadAndSwitchState(new PlayState());
 					return;
 				case 'kabunga':
 					FlxG.openURL("https://benjaminpants.github.io/muko_firefox/index.html"); //banger game
@@ -3495,7 +3495,7 @@ class PlayState extends MusicBeatState
 					#if SHADERS_ENABLED
 					screenshader.Enabled = false;
 					#end
-					FlxG.switchState(new PlayState());
+					LoadingState.loadAndSwitchState(new PlayState());
 					return;
 				default:
 					#if SHADERS_ENABLED

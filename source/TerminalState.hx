@@ -332,7 +332,9 @@ class TerminalState extends MusicBeatState
 
 	private function onKeyDown(e:KeyboardEvent):Void
 	{
-		if (e.keyCode == 13) // Enter
+		if (e.keyCode == 16 || e.keyCode == 17 || e.keyCode == 220 || e.keyCode == 27) // Do nothing for Shift, Ctrl, Esc, and flixel console hotkey
+			return;
+		else if (e.keyCode == 13) // Enter
 		{
 			var calledFunc:Bool = false;
 			var arguments:Array<String> = curCommand.split(" ");

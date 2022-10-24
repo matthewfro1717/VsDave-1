@@ -379,7 +379,7 @@ class TerminalState extends MusicBeatState
     #if android
     function writeText(letter:String)
     {
-        if (letter == 'Enter')
+        if (letter == 'enter')
         {
             var calledFunc:Bool = false;
             var arguments:Array<String> = curCommand.split(" ");
@@ -403,7 +403,7 @@ class TerminalState extends MusicBeatState
             UpdatePreviousText(true);
             return;
         }
-        else if (letter == 'Backspace')
+        else if (letter == 'backspace')
         {
             curCommand = curCommand.substr(0,curCommand.length - 1);
             typeSound.play();
@@ -415,7 +415,7 @@ class TerminalState extends MusicBeatState
         // }
         else
         {
-            curCommand = letter;
+            curCommand += letter;
             typeSound.play();
         }
 

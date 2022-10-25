@@ -353,6 +353,7 @@ credit_Aizakku==Portguese-Brazillian Translator
 credit_Soulegal==Portguese-Brazillian Translator
 
 //contributors
+credit_M.A. Jigsaw==Android version programmer
 credit_Steph45==Minor programming
 credit_evdial==Bambi Week Main Artist
 credit_wugalex==BG Artist

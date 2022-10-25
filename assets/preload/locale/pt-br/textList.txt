@@ -351,6 +351,7 @@ credit_Aizakku==Tradutor (Português Brasileiro)
 credit_Soulegal==Tradutor (Português Brasileiro)
 
 //contributors
+credit_M.A. Jigsaw==Programador versao do android
 credit_Steph45==Programação adicional
 credit_evdial==Artista principal da semana do Bambi
 credit_wugalex==Artista de Cenário

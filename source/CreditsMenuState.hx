@@ -137,6 +137,12 @@ class CreditsMenuState extends MusicBeatState
       ]),
       
       // Contributors //
+      new Person("M.A. Jigsaw", CreditsType.Contributor,
+      [
+         new Social('youtube', 'https://www.youtube.com/channel/UC2Sk7vtPzOvbVzdVTWrribQ'),
+         new Social('twitter', 'https://twitter.com/jigsaw1_ma'),
+         new Social('discord', 'M.A JIgsaw#9479')
+      ]),
       new Person("Steph45", CreditsType.Contributor,
       [
          new Social('youtube', 'https://www.youtube.com/channel/UClb4YjR8i74G-ue2nyiH2DQ')

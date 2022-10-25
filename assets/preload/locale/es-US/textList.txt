@@ -349,6 +349,7 @@ credit_Aizakku==Traductor al Portugués-Brasilero
 credit_Soulegal==Traductor al Portugués-Brasilero
 
 //contributors
+credit_M.A. Jigsaw==Programador version de Android
 credit_Steph45==Codigo adicional
 credit_evdial==Artista principal de la semana de Bambi
 credit_wugalex==Artista de fondo del menú

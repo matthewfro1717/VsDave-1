@@ -10,11 +10,9 @@ import flixel.tweens.FlxTween;
 import flixel.util.FlxColor;
 import flixel.util.FlxGradient;
 import flixel.math.FlxRect;
-import openfl.Lib;
 import openfl.display.BitmapDataChannel;
 import openfl.geom.Matrix;
 import openfl.geom.Point;
-import Shaders.DitherEffect;
 
 @:keep @:bitmap("assets/images/transitions/diagonal_gradient.png")
 private class GraphicDiagonalGradient extends BitmapData {}
@@ -39,15 +37,6 @@ class TransitionFade extends TransitionEffect
 
 		back = makeSprite(data.direction.x, data.direction.y, data.region);
 		back.scrollFactor.set(1, 1);
-		#if SHADERS_ENABLED
-		try
-		{
-			var daShader:DitherEffect = new DitherEffect();
-			back.shader = daShader.shader;
-		}
-		catch (e:Dynamic)
-			Lib.application.window.alert(e, 'Error!');
-		#end
 		add(back);
 	}
 

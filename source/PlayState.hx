@@ -111,8 +111,10 @@ class PlayState extends MusicBeatState
 	public static var bads:Int = 0;
 	public static var goods:Int = 0;
 	public static var sicks:Int = 0;
-
-	public var ExpungedWindowCenterPos:FlxPoint = new FlxPoint(0,0);
+	public static var botPlay:Bool = false;
+	
+        public var botplaySine:Float = 0;
+	public var botplayTxt:FlxText;
 
 	public var dadCombo:Int = 0;
 	public static var globalFunny:CharacterFunnyEffect = CharacterFunnyEffect.None;
@@ -498,6 +500,7 @@ class PlayState extends MusicBeatState
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 		eyesoreson = FlxG.save.data.eyesores;
+		botPlay = FlxG.save.data.botplay;
 
 		sicks = 0;
 		bads = 0;
@@ -1321,6 +1324,14 @@ class PlayState extends MusicBeatState
 		scoreTxt.antialiasing = true;
 		scoreTxt.screenCenter(X);
 		add(scoreTxt);
+		
+                botplayTxt = new FlxText(healthBarBG.x + healthBarBG.width / 2 - 75, healthBarBG.y + (FlxG.save.data.downscroll ? 100 : -100), 0,
+		"BOTPLAY", 20);
+		botplayTxt.setFormat((SONG.song.toLowerCase() == "overdrive") ? Paths.font("ariblk.ttf") : font, 42, FlxColor.WHITE, RIGHT, FlxTextBorderStyle.OUTLINE, FlxColor.BLACK);
+		botplayTxt.scrollFactor.set();
+		botplayTxt.borderSize = 3;
+		botplayTxt.visible = botPlay;
+		add(botplayTxt);
 
 		if (inFiveNights)
 		{

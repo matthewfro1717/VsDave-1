@@ -1360,6 +1360,7 @@ class PlayState extends MusicBeatState
 		iconP1.cameras = [camHUD];
 		iconP2.cameras = [camHUD];
 		scoreTxt.cameras = [camHUD];
+		botplayTxt.cameras = [camHUD];
 		if (kadeEngineWatermark != null)
 		{
 			kadeEngineWatermark.cameras = [camHUD];

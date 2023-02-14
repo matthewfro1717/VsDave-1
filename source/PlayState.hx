@@ -3045,7 +3045,7 @@ class PlayState extends MusicBeatState
 				time.text = times[curTime] + ' AM';
 			}
 			if (FlxG.mouse.overlaps(doorButton) && (FlxG.mouse.justPressed || controls.KEY5) && !doorChanging);
-				(!botPlay && !doorChanging && dad.curCharacter == 'nofriend' && (!doorClosed ? dad.animation.curAnim.name != 'attack' : dad.animation.curAnim.name == 'attack'));
+				(botPlay && !doorChanging && dad.curCharacter == 'nofriend' && (doorClosed ? dad.animation.curAnim.name != 'attack' : dad.animation.curAnim.name == 'attack'));
 			{
 				changeDoorState(!doorClosed);
 			}

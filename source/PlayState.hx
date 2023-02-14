@@ -3916,6 +3916,7 @@ class PlayState extends MusicBeatState
 					notes.remove(daNote, true);
 					daNote.destroy();
 				}
+				if(daNote.mustPress && botPlay) {
 				if (daNote.MyStrum != null)
 				{
 					daNote.y = yFromNoteStrumTime(daNote, daNote.MyStrum, scrollType == 'downscroll');
@@ -3934,10 +3935,12 @@ class PlayState extends MusicBeatState
 				}
 				if (!daNote.wasGoodHit && daNote.mustPress && daNote.finishedGenerating && Conductor.songPosition >= daNote.strumTime + (350 / (0.45 * FlxMath.roundDecimal(SONG.speed * noteSpeed, 2))))
 				{
-					if (!noMiss)
-						noteMiss(daNote.originalType, daNote);
-
-					vocals.volume = 0;
+					if (!botPlay) {
+						if (!noMiss)
+							noteMiss(daNote.originalType, daNote);
+	
+						vocals.volume = 0;
+					}
 
 					destroyNote(daNote);
 				}
@@ -3946,7 +3949,7 @@ class PlayState extends MusicBeatState
 
 		ZoomCam(focusOnDadGlobal);
 
-		if (!inCutscene)
+		if (!inCutscene && !botPlay)
 			keyShit();
 
 		#if debug
@@ -4173,7 +4176,7 @@ class PlayState extends MusicBeatState
 
 		FlxG.sound.music.volume = 0;
 		vocals.volume = 0;
-		if (SONG.validScore)
+		if (SONG.validScore && !botPlay && !(!modchartoption && (SONG.song.toLowerCase() == 'cheating' || SONG.song.toLowerCase() == 'unfairness' || SONG.song.toLowerCase() == 'kabunga' || localFunny == CharacterFunnyEffect.Exbungo || localFunny == CharacterFunnyEffect.Recurser || SONG.song.toLowerCase() == 'exploitation')))
 		{
 			trace("score is valid");
 
@@ -4237,6 +4240,7 @@ class PlayState extends MusicBeatState
 			}
 			completedSongs = FlxG.save.data.songsCompleted;
 			completedSongs.push(storyPlaylist[0]);
+			if (!botPlay) completedSongs.push(storyPlaylist[0]);
 			for (i in 0...mustCompleteSongs.length)
 			{
 				if (!completedSongs.contains(mustCompleteSongs[i]))
@@ -4322,13 +4326,13 @@ class PlayState extends MusicBeatState
 				// if ()
 				StoryMenuState.weekUnlocked[Std.int(Math.min(storyWeek + 1, StoryMenuState.weekUnlocked.length - 1))] = true;
 
-				if (SONG.validScore)
+				if (SONG.validScore && !botPlay)
 				{
 					Highscore.saveWeekScore(storyWeek, campaignScore,
 						storyDifficulty, characteroverride == "none" || characteroverride == "bf" ? "bf" : characteroverride);
 				}
 
-				FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
+				if (!botPlay) FlxG.save.data.weekUnlocked = StoryMenuState.weekUnlocked;
 				FlxG.save.flush();
 			}
 			else
@@ -4395,6 +4399,32 @@ class PlayState extends MusicBeatState
 		}
 		else
 		{
+			if (storyDifficulty == 0) {
+				var completedSongs:Array<String> = [];
+				var mustCompleteSongs:Array<String> = ['House', 'Insanity', 'Polygonized', 'Blocked', 'Corn-Theft', 'Maze', 'Splitathon', 'Shredder', 'Greetings', 'Interdimensional', 'Rano'];
+				var allSongsCompleted:Bool = true;
+			
+				if (FlxG.save.data.songsCompletedCanon == null)
+				{
+					FlxG.save.data.songsCompletedCanon = new Array<String>();
+				}
+				completedSongs = FlxG.save.data.songsCompletedCanon;
+				if (!botPlay) completedSongs.push(curSong);
+				for (i in 0...mustCompleteSongs.length)
+				{
+					if (!completedSongs.contains(mustCompleteSongs[i]))
+					{
+						allSongsCompleted = false;
+						break;
+					}
+				}
+				if (allSongsCompleted && CharacterSelectState.isLocked('supershaggy'))
+				{
+					CharacterSelectState.unlockCharacter('supershaggy');
+				}
+				FlxG.save.data.songsCompletedCanon = completedSongs;
+				FlxG.save.flush();
+			}
 			switch (SONG.song.toLowerCase())
 			{
 				case 'glitch':
@@ -4642,37 +4672,39 @@ class PlayState extends MusicBeatState
 
 		var daRating:String = "sick";
 
-		if (noteDiff > Conductor.safeZoneOffset * 2)
-		{
-			daRating = 'shit';
-			totalNotesHit -= 2;
-			score = 10;
-			ss = false;
-			shits++;
-		}
-		else if (noteDiff < Conductor.safeZoneOffset * -2)
-		{
-			daRating = 'shit';
-			totalNotesHit -= 2;
-			score = 25;
-			ss = false;
-			shits++;
-		}
-		else if (noteDiff > Conductor.safeZoneOffset * 0.45)
-		{
-			daRating = 'bad';
-			score = 100;
-			totalNotesHit += 0.2;
-			ss = false;
-			bads++;
-		}
-		else if (noteDiff > Conductor.safeZoneOffset * 0.25)
-		{
-			daRating = 'good';
-			totalNotesHit += 0.65;
-			score = 200;
-			ss = false;
-			goods++;
+		if (!botPlay) {
+			if (noteDiff > Conductor.safeZoneOffset * 2)
+			{
+				daRating = 'shit';
+				totalNotesHit -= 2;
+				score = 10;
+				ss = false;
+				shits++;
+			}
+			else if (noteDiff < Conductor.safeZoneOffset * -2)
+			{
+				daRating = 'shit';
+				totalNotesHit -= 2;
+				score = 25;
+				ss = false;
+				shits++;
+			}
+			else if (noteDiff > Conductor.safeZoneOffset * 0.45)
+			{
+				daRating = 'bad';
+				score = 100;
+				totalNotesHit += 0.2;
+				ss = false;
+				bads++;
+			}
+			else if (noteDiff > Conductor.safeZoneOffset * 0.25)
+			{
+				daRating = 'good';
+				totalNotesHit += 0.65;
+				score = 200;
+				ss = false;
+				goods++;
+			}
 		}
 		if (daRating == 'sick')
 		{
@@ -5087,7 +5119,7 @@ class PlayState extends MusicBeatState
 		{
 			goodNoteHit(note);
 		}
-		else if (!theFunne)
+		else if (!theFunne && !botPlay)
 		{
 			badNoteCheck(note);
 		}
@@ -5181,11 +5213,24 @@ class PlayState extends MusicBeatState
 
 			playerStrums.forEach(function(spr:StrumNote)
 			{
-				if (Math.abs(note.noteData) == spr.ID)
-				{
-					spr.animation.play('confirm', true);
+				if(botPlay) {
+					if (Math.abs(Math.round(Math.abs(note.noteData)) % playerStrumAmount) == spr.ID)
+					{
+						spr.playAnim('confirm', true);
+						spr.animation.finishCallback = function(name:String)
+						{
+							spr.playAnim('static', true);
+						}
+					}
+					spr.pressingKey5 = note.noteStyle == 'shape';
+				} else {
+					if (Math.abs(note.noteData) == spr.ID)
+					{
+						spr.playAnim('confirm', true);
+					}
 				}
 			});
+
 			if (isRecursed && !note.isSustainNote)
 			{
 				noteCount++;
@@ -6857,6 +6902,7 @@ class PlayState extends MusicBeatState
 			kadeEngineWatermark.font = Paths.font('exploit/${chosenFont}.ttf');
 			creditsWatermark.font = Paths.font('exploit/${chosenFont}.ttf');
 			scoreTxt.font = Paths.font('exploit/${chosenFont}.ttf');
+			botplayTxt.font = Paths.font('exploit/${chosenFont}.ttf');
 			if (songName != null)
 			{
 				songName.font = Paths.font('exploit/${chosenFont}.ttf');

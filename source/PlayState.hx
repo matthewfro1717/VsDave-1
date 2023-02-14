@@ -111,8 +111,8 @@ class PlayState extends MusicBeatState
 	public static var bads:Int = 0;
 	public static var goods:Int = 0;
 	public static var sicks:Int = 0;
-	public static var botPlay:Bool = false;
 	
+	public static var botPlay:Bool = false;
         public var botplaySine:Float = 0;
 	public var botplayTxt:FlxText;
 
@@ -3045,6 +3045,7 @@ class PlayState extends MusicBeatState
 				time.text = times[curTime] + ' AM';
 			}
 			if (FlxG.mouse.overlaps(doorButton) && (FlxG.mouse.justPressed || controls.KEY5) && !doorChanging)
+				(botPlay && !doorChanging && dad.curCharacter == 'nofriend' && (doorClosed ? dad.animation.curAnim.name != 'attack' : dad.animation.curAnim.name == 'attack')))
 			{
 				changeDoorState(!doorClosed);
 			}
@@ -3701,7 +3702,7 @@ class PlayState extends MusicBeatState
 		FlxG.watch.addQuick("beatShit", curBeat);
 		FlxG.watch.addQuick("stepShit", curStep);
 
-		if (health <= 0)
+		if (health <= 0 && !botPlay)
 		{
 			if(!perfectMode)
 			{

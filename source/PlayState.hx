@@ -194,7 +194,6 @@ class PlayState extends MusicBeatState
 
 	private static var prevCamFollow:FlxObject;
 	public static var recursedStaticWeek:Bool;
-	
 
 	private var strumLine:FlxSprite;
 	private var strumLineNotes:FlxTypedGroup<StrumNote>;
@@ -304,11 +303,12 @@ class PlayState extends MusicBeatState
 	public static var modchartoption:Bool = true;
 	var weirdBG:FlxSprite;
 
+	public static var modchartoption:Bool = true;
+
 	var mcStarted:Bool = false; 
 	public var noMiss:Bool = false;
 	public var creditsPopup:CreditsPopUp;
 	public var blackScreen:FlxSprite;
-
 
 	//bg stuff
 	var baldi:BGSprite;
@@ -533,10 +533,8 @@ class PlayState extends MusicBeatState
 		if (FlxG.sound.music != null)
 			FlxG.sound.music.stop();
 		eyesoreson = FlxG.save.data.eyesores;
-		#if debug
 		botPlay = FlxG.save.data.botplay;
-		#end
-		modchartoption = !FlxG.save.data.modchart;
+		modchartoption = FlxG.save.data.modchart;
 
 		sicks = 0;
 		bads = 0;

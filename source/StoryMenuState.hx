@@ -257,7 +257,7 @@ class StoryMenuState extends MusicBeatState
 				{
 					case 1:
 						FlxG.sound.music.stop();
-						var video:VideoHandler = new VideoHandler();
+					var video:VideoHandler = new VideoHandler();
 						video.finishCallback = function()
 						{
 							LoadingState.loadAndSwitchState(new PlayState(), true);

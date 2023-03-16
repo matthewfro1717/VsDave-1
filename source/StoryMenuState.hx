@@ -22,7 +22,7 @@ import flixel.util.FlxTimer;
 import Discord.DiscordClient;
 #end
 
-import hxcodec.VideoHandler;
+import MP4Handler;
 
 using StringTools;
 
@@ -259,7 +259,7 @@ class StoryMenuState extends MusicBeatState
 				{
 					case 1:
 						FlxG.sound.music.stop();
-						var video:VideoHandler = new VideoHandler();
+						var video:MP4Handler = new MP4Handler();
 						video.finishCallback = function()
 						{
 							LoadingState.loadAndSwitchState(new PlayState(), true);

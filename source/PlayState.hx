@@ -194,6 +194,7 @@ class PlayState extends MusicBeatState
 
 	private static var prevCamFollow:FlxObject;
 	public static var recursedStaticWeek:Bool;
+	
 
 	private var strumLine:FlxSprite;
 	private var strumLineNotes:FlxTypedGroup<StrumNote>;
@@ -298,17 +299,16 @@ class PlayState extends MusicBeatState
 	var bfNoteCamOffset:Array<Float> = new Array<Float>();
 	var dadNoteCamOffset:Array<Float> = new Array<Float>();
 
-	var video:VideoHandler;
+        var video:VideoHandler = new VideoHandler();
 	public var modchart:ExploitationModchartType;
 	public static var modchartoption:Bool = true;
 	var weirdBG:FlxSprite;
-
-	public static var modchartoption:Bool = true;
 
 	var mcStarted:Bool = false; 
 	public var noMiss:Bool = false;
 	public var creditsPopup:CreditsPopUp;
 	public var blackScreen:FlxSprite;
+
 
 	//bg stuff
 	var baldi:BGSprite;
@@ -534,7 +534,7 @@ class PlayState extends MusicBeatState
 			FlxG.sound.music.stop();
 		eyesoreson = FlxG.save.data.eyesores;
 		botPlay = FlxG.save.data.botplay;
-		modchartoption = FlxG.save.data.modchart;
+		modchartoption = !FlxG.save.data.modchart;
 
 		sicks = 0;
 		bads = 0;
@@ -1957,7 +1957,8 @@ class PlayState extends MusicBeatState
 				freeplayBG.color = FlxColor.multiply(0xFF4965FF, FlxColor.fromRGB(44, 44, 44));
 				freeplayBG.alpha = 0;
 				add(freeplayBG);
-				
+			       
+				#if (flixel < "5.0.0") 
 				charBackdrop = new FlxBackdrop(Paths.image('recursed/daveScroll'), 1, 1, true, true);
 				charBackdrop.antialiasing = true;
 				charBackdrop.scale.set(2, 2);
@@ -1965,6 +1966,7 @@ class PlayState extends MusicBeatState
 				charBackdrop.color = FlxColor.multiply(charBackdrop.color, FlxColor.fromRGB(44, 44, 44));
 				charBackdrop.alpha = 0;
 				add(charBackdrop);
+				#end
 
 				initAlphabet(daveSongs);
 			case 'roof':
@@ -2421,7 +2423,7 @@ class PlayState extends MusicBeatState
 		inCutscene = true;
 		FlxG.sound.music.stop();
 
-		video = new MP4Handler();
+		video = new VideoHandler();
 		video.finishCallback = function()
 		{
 			switch (curSong.toLowerCase())
@@ -2444,7 +2446,7 @@ class PlayState extends MusicBeatState
 	{
 		inCutscene = true;
 
-		video = new MP4Handler();
+		video = new VideoHandler();
 		video.finishCallback = function()
 		{
 			LoadingState.loadAndSwitchState(new PlayState());
